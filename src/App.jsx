@@ -10,6 +10,7 @@ import Settings from './pages/Settings';
 import Navbar from './components/Navbar';
 import ContactUs from "./pages/ContactUs"; 
 import AboutUs from "./pages/AboutUs";
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/about-us" element={<AboutUs />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

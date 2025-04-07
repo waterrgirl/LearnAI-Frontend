@@ -290,3 +290,41 @@ footer a:hover {
   margin: 0 auto;
   padding: 20px;
 }
+
+/* Footer Styles */
+.site-footer {
+  background-color: #efefef;
+  padding: 20px 0;
+  margin-top: 40px;
+  border-top: 1px solid #d3d3d3;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 15px;
+}
+
+.footer-links a {
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #333333;
+}
+
+.footer-copyright {
+  color: #666666;
+  font-size: 0.9rem;
+  margin: 0;
+}
