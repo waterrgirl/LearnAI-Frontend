@@ -9,7 +9,7 @@ function HomePage() {
       <header className="site-header">
         <div className="header-container">
           <div className="header-content">
-            <h1>Welcome to LearnAI</h1>
+            <h1><span className="welcome-text">Welcome to</span> <span className="brand-text">LearnAI</span></h1>
             <p>Your personalized academic assistant, powered by AI.</p>
           </div>
           <div className="logo-container">
