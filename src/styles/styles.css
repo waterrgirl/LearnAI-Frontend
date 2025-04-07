@@ -69,32 +69,20 @@ nav ul li {
   align-items: center;
 }
 
-@media (max-width: 768px) {
-  .burger-menu {
-    display: flex;
-  }
+/* Remove responsive breakpoint and set fixed layout */
+.burger-menu {
+  display: none;
+}
 
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background-color: #85C1E9;
-    padding: 20px;
-    text-align: center;
-    gap: 20px;
-  }
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
 
-  .nav-links.open {
-    display: flex;
-  }
-
-  nav ul li {
-    width: 100%;
-    justify-content: center;
-  }
+nav ul li {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
 }
 
 .nav-logo {
@@ -180,7 +168,7 @@ section {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -227,7 +215,7 @@ footer a:hover {
 }
 
 .container {
-  max-width: 1200px;
+  width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
