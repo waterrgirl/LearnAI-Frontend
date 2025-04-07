@@ -107,22 +107,45 @@ nav ul li a:hover {
 }
 
 /* Header Section */
-header {
-  text-align: center;
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 50px 20px;
-  background-color: #ffffff; /* Changed to white */
-  color: #000000; /* Changed to black */
-  border-bottom: 2px solid #d3d3d3; /* Changed border color */
+  background-color: #ffffff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-content {
+  text-align: left;
+  flex: 1;
+  padding-right: 40px;
 }
 
 header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #000000;
+  font-family: 'Arial', sans-serif;
 }
 
 header p {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 20px;
+  color: #000000;
+  line-height: 1.6;
+}
+
+.logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.custom-logo {
+  max-width: 100%;
+  height: auto;
 }
 
 .cta-buttons {

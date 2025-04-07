@@ -7,20 +7,14 @@ function HomePage() {
     <div className="homepage">
       {/* Header Section */}
       <header className="site-header">
-        <nav className="header-nav">
+        <div className="header-container">
+          <div className="header-content">
+            <h1>Welcome to LearnAI</h1>
+            <p>Your personalized academic assistant, powered by AI.</p>
+          </div>
           <div className="logo-container">
-            {}
             <img src="src/assets/LearnAI-Slogan.png" alt="LearnAI Logo" className="custom-logo" />
           </div>
-          <div className="burger-menu">
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
-          </div>
-        </nav>
-        <div className="header-content">
-          <h1>Welcome to LearnAI</h1>
-          <p>Your personalized academic assistant, powered by AI.</p>
         </div>
       </header>
 
