@@ -201,18 +201,25 @@ section {
   color: #000000; /* Changed to black */
 }
 
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.features-list {
+  list-style: none;
+  padding: 0;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .feature-item {
-  background-color: #ffffff; /* Changed to white */
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  margin-bottom: 20px;
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.feature-item:hover {
+  transform: translateX(10px);
 }
 
 .feature-item h3 {

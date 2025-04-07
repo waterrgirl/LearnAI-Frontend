@@ -21,24 +21,24 @@ function HomePage() {
       {/* Features Section */}
       <section className="features">
         <h2>Features</h2>
-        <div className="features-grid">
-          <div className="feature-item">
+        <ul className="features-list">
+          <li className="feature-item">
             <h3>Task Management</h3>
             <p>Organize and prioritize your academic tasks with ease.</p>
-          </div>
-          <div className="feature-item">
+          </li>
+          <li className="feature-item">
             <h3>Progress Tracking</h3>
             <p>Visualize your task completion and academic growth.</p>
-          </div>
-          <div className="feature-item">
+          </li>
+          <li className="feature-item">
             <h3>Calendar</h3>
             <p>Keep track of deadlines with an intuitive calendar view.</p>
-          </div>
-          <div className="feature-item">
+          </li>
+          <li className="feature-item">
             <h3>Personalized Suggestions</h3>
             <p>Receive AI-driven study tips tailored to your needs.</p>
-          </div>
-        </div>
+          </li>
+        </ul>
       </section>
     </div>
   );
