@@ -3,8 +3,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #efefef;
-  color: #000000;
+  background-color: #ffffff; /* Changed to white */
+  color: #000000; /* Changed to black */
   box-sizing: border-box;
 }
 
@@ -21,10 +21,10 @@ ul {
 
 /* Navbar Styles */
 nav {
-  background-color: #000000;
-  color: #efefef;
+  background-color: #d3d3d3; /* Changed to light grey */
+  color: #000000; /* Changed to black */
   padding: 15px 20px;
-  border-bottom: 2px solid #efefef;
+  border-bottom: 2px solid #ffffff; /* Changed border color */
   position: relative;
 }
 
@@ -46,7 +46,7 @@ nav {
 .burger-bar {
   width: 30px;
   height: 3px;
-  background-color: white;
+  background-color: #000000; /* Changed to black */
   transition: all 0.3s ease;
 }
 
@@ -69,7 +69,7 @@ nav {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #85C1E9;
+  background-color: #ffffff; /* Changed to white */
   padding: 20px;
   gap: 20px;
   z-index: 99;
@@ -98,21 +98,21 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white;
+  color: #000000; /* Changed to black */
   transition: color 0.3s;
 }
 
 nav ul li a:hover {
-  color: #004080; /* Dark blue on hover */
+  color: #666666; /* Changed hover color */
 }
 
 /* Header Section */
 header {
   text-align: center;
   padding: 50px 20px;
-  background-color: #B3D9FF; /* Light pastel blue */
-  color: white;
-  border-bottom: 2px solid #85C1E9;
+  background-color: #ffffff; /* Changed to white */
+  color: #000000; /* Changed to black */
+  border-bottom: 2px solid #d3d3d3; /* Changed border color */
 }
 
 header h1 {
@@ -135,7 +135,7 @@ header p {
   padding: 10px 20px;
   font-size: 1rem;
   background-color: #000000;
-  color: #efefef;
+  color: #ffffff; /* Changed to white */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -154,7 +154,7 @@ section {
 }
 
 .features {
-  background-color: #B3D9FF;
+  background-color: #ffffff; /* Changed to white */
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -164,7 +164,7 @@ section {
   font-size: 2rem;
   margin-bottom: 20px;
   text-align: center;
-  color: #004080;
+  color: #000000; /* Changed to black */
 }
 
 .features-grid {
@@ -174,7 +174,7 @@ section {
 }
 
 .feature-item {
-  background-color: #EAF6FF; /* Lighter pastel blue */
+  background-color: #ffffff; /* Changed to white */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -184,25 +184,25 @@ section {
 .feature-item h3 {
   margin-bottom: 10px;
   font-size: 1.2rem;
-  color: #004080;
+  color: #000000; /* Changed to black */
 }
 
 .feature-item p {
   font-size: 1rem;
-  color: #004080;
+  color: #000000; /* Changed to black */
 }
 
 /* Footer Section */
 footer {
-  background-color: #85C1E9; /* Medium pastel blue */
-  color: white;
+  background-color: #ffffff; /* Changed to white */
+  color: #000000; /* Changed to black */
   text-align: center;
   padding: 20px;
   font-size: 0.9rem;
 }
 
 footer a {
-  color: white;
+  color: #000000; /* Changed to black */
   text-decoration: none;
 }
 
