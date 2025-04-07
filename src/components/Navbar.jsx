@@ -12,13 +12,15 @@ function Navbar() {
 
   return (
     <nav>
-      <Link to="/" className="nav-logo">
-        <img src="/src/assets/LearnAI-Logo.png" alt="LearnAI Logo" className="nav-logo-img" />
-      </Link>
-      <div className="burger-menu" onClick={toggleMenu}>
-        <div className={`burger-bar ${isOpen ? 'open' : ''}`}></div>
-        <div className={`burger-bar ${isOpen ? 'open' : ''}`}></div>
-        <div className={`burger-bar ${isOpen ? 'open' : ''}`}></div>
+      <div className="nav-container">
+        <Link to="/" className="nav-logo">
+          <img src="/src/assets/LearnAI-Logo.png" alt="LearnAI Logo" className="nav-logo-img" />
+        </Link>
+        <div className="burger-menu" onClick={toggleMenu}>
+          <div className={`burger-bar ${isOpen ? 'open' : ''}`}></div>
+          <div className={`burger-bar ${isOpen ? 'open' : ''}`}></div>
+          <div className={`burger-bar ${isOpen ? 'open' : ''}`}></div>
+        </div>
       </div>
       <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
         <li><Link to="/tasks" onClick={toggleMenu}>Tasks</Link></li>

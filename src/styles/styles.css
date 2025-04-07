@@ -24,19 +24,23 @@ nav {
   background-color: #85C1E9;
   color: white;
   padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-bottom: 2px solid #B3D9FF;
   position: relative;
 }
 
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .burger-menu {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 6px;
   cursor: pointer;
   padding: 5px;
+  z-index: 100;
 }
 
 .burger-bar {
@@ -59,29 +63,26 @@ nav {
 }
 
 .nav-links {
-  display: flex;
-  gap: 15px;
-}
-
-nav ul li {
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-}
-
-/* Remove responsive breakpoint and set fixed layout */
-.burger-menu {
   display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #85C1E9;
+  padding: 20px;
+  gap: 20px;
+  z-index: 99;
 }
 
-.nav-links {
+.nav-links.open {
   display: flex;
-  gap: 15px;
 }
 
 nav ul li {
   padding: 0 10px;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
