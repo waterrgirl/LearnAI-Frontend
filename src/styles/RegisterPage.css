@@ -53,7 +53,7 @@ input:focus {
 .register-button {
   padding: 10px;
   font-size: 1rem;
-  background-color: #85C1E9;
+  background-color: #000000;
   color: white;
   border: none;
   border-radius: 5px;
@@ -62,7 +62,7 @@ input:focus {
 }
 
 .register-button:hover {
-  background-color: #004080;
+  background-color: #333333;
 }
 
 .register-button:disabled {

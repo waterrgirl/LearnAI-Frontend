@@ -61,7 +61,7 @@ h1 {
 }
 
 .add-task-form button:hover {
-  background-color: #004080; /* Dark blue hover */
+  background-color: #333333; /* Dark blue hover */
 }
 
 /* Task List Styles */
