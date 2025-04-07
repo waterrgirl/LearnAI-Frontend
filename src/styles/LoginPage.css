@@ -23,13 +23,16 @@ h1 {
 }
 
 input {
-  width: 100%;
+  width: 80%;
+  max-width: 300px;
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #85C1E9;
   border-radius: 5px;
   background-color: #B3D9FF;
   color: #004080;
+  margin: 0 auto;
+  display: block;
 }
 
 input:focus {
