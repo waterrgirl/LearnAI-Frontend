@@ -13,7 +13,7 @@ function HomePage() {
             <p>Your personalized academic assistant, powered by AI.</p>
           </div>
           <div className="logo-container">
-            <img src="src/assets/LearnAI-Slogan.png" alt="LearnAI Logo" className="custom-logo" />
+            <img src="src/assets/LearnAI-Slogan(nobg).png" alt="LearnAI Logo" className="custom-logo" />
           </div>
         </div>
       </header>
