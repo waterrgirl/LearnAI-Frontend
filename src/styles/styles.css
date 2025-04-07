@@ -37,6 +37,19 @@ nav ul {
 
 nav ul li {
   padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-img {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
 }
 
 nav ul li a {
