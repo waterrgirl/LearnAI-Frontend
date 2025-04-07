@@ -25,9 +25,10 @@ function Navbar() {
       <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
         <li><Link to="/tasks" onClick={toggleMenu}>Tasks</Link></li>
         <li><Link to="/progress" onClick={toggleMenu}>Progress</Link></li>
-        <li><Link to="/settings" onClick={toggleMenu}>Settings</Link></li>
-        <li><Link to="/login" onClick={toggleMenu}>Login</Link></li>
         <li><Link to="/calendar" onClick={toggleMenu}>Calendar</Link></li>
+        <li><Link to="/login" onClick={toggleMenu}>LogIn</Link></li>
+        <li><Link to="/register" onClick={toggleMenu}>Signup</Link></li>
+        <li><Link to="/settings" onClick={toggleMenu}>Settings</Link></li>
       </ul>
     </nav>
   );
