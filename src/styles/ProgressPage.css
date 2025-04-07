@@ -1,0 +1,44 @@
+                         .progress-page {
+                           font-family: Arial, sans-serif;
+                           max-width: 800px;
+                           margin: 50px auto;
+                           text-align: center;
+                           padding: 20px;
+                           background-color: #EAF6FF;
+                           border-radius: 10px;
+                           border: 1px solid #85C1E9;
+                           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                         }
+
+                         h1 {
+                           font-size: 2rem;
+                           margin-bottom: 20px;
+                           color: #004080;
+                         }
+
+                         .progress-summary {
+                           margin-bottom: 30px;
+                           font-size: 1.2rem;
+                           color: #004080;
+                         }
+
+                         .error-message {
+                           color: red;
+                           font-size: 1rem;
+                         }
+
+                         .charts {
+                           display: flex;
+                           flex-wrap: wrap;
+                           gap: 20px;
+                           justify-content: center;
+                         }
+
+                         .chart {
+                           flex: 1 1 300px;
+                           max-width: 400px;
+                           background-color: #B3D9FF;
+                           border-radius: 10px;
+                           padding: 10px;
+                           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                         }

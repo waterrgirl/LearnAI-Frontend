@@ -1,0 +1,63 @@
+.settings-page {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #85C1E9;
+  background-color: #EAF6FF;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #004080;
+}
+
+.settings-section {
+  margin-bottom: 30px;
+  text-align: left;
+  border: 1px solid #85C1E9;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #B3D9FF;
+}
+
+.settings-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #004080;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #85C1E9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #004080;
+}
+
+.success-message {
+  color: green;
+  font-size: 1rem;
+}
+
+.error-message {
+  color: red;
+  font-size: 1rem;
+}

@@ -1,0 +1,90 @@
+/* Contact Us Page Styles */
+.contact-us-page {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #85C1E9;
+  border-radius: 10px;
+  background-color: #EAF6FF;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #004080;
+}
+
+p {
+  margin-bottom: 20px;
+  color: #004080;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+.form-group {
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #85C1E9;
+  border-radius: 5px;
+  background-color: #B3D9FF;
+  color: #004080;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #004080;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  color: green;
+  font-size: 0.9rem;
+}
+
+.submit-button {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #85C1E9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #004080;
+}
+
+.submit-button:disabled {
+  background-color: #CCC;
+  cursor: not-allowed;
+}
