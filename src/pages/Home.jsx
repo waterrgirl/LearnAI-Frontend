@@ -40,6 +40,14 @@ function HomePage() {
           </li>
         </ul>
       </section>
+
+      {/* Call to Action Section */}
+      <section className="cta-section">
+        <div className="cta-buttons">
+          <Link to="/login" className="cta-button">Login</Link>
+          <Link to="/register" className="cta-button">Sign Up</Link>
+        </div>
+      </section>
     </div>
   );
 }

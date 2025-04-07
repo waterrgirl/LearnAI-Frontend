@@ -251,6 +251,35 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* CTA Section */
+.cta-section {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  text-decoration: none;
+}
+
+.cta-button:hover {
+  background-color: #333333;
+  transform: translateY(-2px);
+}
+
 /* Utility Classes */
 .text-center {
   text-align: center;
