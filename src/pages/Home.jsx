@@ -10,7 +10,7 @@ function HomePage() {
         <nav className="header-nav">
           <div className="logo-container">
             {/* Replace "/path/to/custom-logo.png" with your logo image path */}
-            <img src="/path/to/custom-logo.png" alt="LearnAI Logo" className="custom-logo" />
+            <img src="src/assets/LearnAI-Logo.png" alt="LearnAI Logo" className="custom-logo" />
           </div>
           <div className="burger-menu">
             <div className="bar"></div>
