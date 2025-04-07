@@ -5,8 +5,8 @@
   margin: 50px auto;
   text-align: center;
   padding: 20px;
-  border: 1px solid #85C1E9; /* Medium pastel blue */
-  background-color: #EAF6FF; /* Light pastel blue */
+  border: 1px solid #d3d3d3;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -14,7 +14,7 @@
 h1 {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #004080; /* Dark blue */
+  color: #000000;
 }
 
 .add-task-form {

@@ -4,8 +4,8 @@
   max-width: 600px; /* Slightly smaller width for compact layout */
   margin: 50px auto;
   padding: 20px;
-  background-color: #EAF6FF; /* Light pastel blue */
-  border: 1px solid #85C1E9; /* Medium pastel blue */
+  background-color: #ffffff;
+  border: 1px solid #d3d3d3;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -14,7 +14,7 @@
 /* Page Title */
 .title {
   font-size: 2rem;
-  color: #004080; /* Dark blue */
+  color: #000000;
   margin-bottom: 20px;
 }
 

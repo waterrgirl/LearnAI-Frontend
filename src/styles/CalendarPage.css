@@ -1,9 +1,9 @@
 /* Define theme variables for consistency */
 :root {
-  --primary-color: #004080;       /* Dark blue */
-  --secondary-color: #85C1E9;     /* Medium pastel blue */
-  --accent-color: #B3D9FF;        /* Light pastel blue */
-  --light-bg: #EAF6FF;            /* Very light blue */
+  --primary-color: #000000;
+  --secondary-color: #d3d3d3;
+  --accent-color: #efefef;
+  --light-bg: #ffffff;
   --white: #ffffff;
   --font-family: 'Roboto', sans-serif;
 }
