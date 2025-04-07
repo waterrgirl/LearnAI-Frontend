@@ -43,15 +43,15 @@ textarea {
   width: 100%;
   padding: 10px;
   font-size: 1rem;
-  border: 1px solid #85C1E9;
+  border: 1px solid #d3d3d3;
   border-radius: 5px;
-  background-color: #B3D9FF;
-  color: #004080;
+  background-color: #efefef;
+  color: #000000;
 }
 
 input:focus,
 textarea:focus {
-  border-color: #004080;
+  border-color: #000000;
   outline: none;
 }
 
@@ -72,8 +72,8 @@ textarea {
 .submit-button {
   padding: 10px;
   font-size: 1rem;
-  background-color: #85C1E9;
-  color: white;
+  background-color: #000000;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -81,7 +81,7 @@ textarea {
 }
 
 .submit-button:hover {
-  background-color: #004080;
+  background-color: #333333;
 }
 
 .submit-button:disabled {

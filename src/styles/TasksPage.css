@@ -116,11 +116,11 @@ h1 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #85C1E9; /* Medium pastel blue */
-  color: white;
+  background-color: #000000;
+  color: #ffffff;
   transition: background-color 0.3s;
 }
 
 .task-list button:hover {
-  background-color: #004080; /* Dark blue hover */
+  background-color: #333333;
 }
