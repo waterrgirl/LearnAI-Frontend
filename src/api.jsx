@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://3bd9-35-243-232-200.ngrok-free.app", // Replace with your backend URL
+  // default to localhost on port 5001.
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5001",
 });
 
 export default API;
