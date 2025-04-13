@@ -17,9 +17,7 @@ function TasksPage() {
     setLoading(true);
     setError(null);
     try {
-      console.log("Fetching tasks from backend…");
       const res = await API.get("/api/tasks");
-      console.log("Tasks fetched:", res.data);
       setTasks(res.data);
     } catch (err) {
       console.error("Error fetching tasks:", err);
@@ -36,7 +34,6 @@ function TasksPage() {
       return;
     }
     try {
-      console.log("Adding task:", newTask);
       await API.post("/api/add-task", newTask);
       setNewTask({ title: "", deadline: "", priority: "Low" });
       fetchTasks();
@@ -46,14 +43,25 @@ function TasksPage() {
     }
   };
 
-  const toggleCompletion = (id) => {
-    setTasks((ts) =>
-      ts.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
-    );
+  const toggleCompletion = async (id, current) => {
+    try {
+      await API.patch(`/api/tasks/${id}`, { completed: !current });
+      fetchTasks();
+    } catch (err) {
+      console.error("Error updating task:", err);
+      alert("Could not update task status.");
+    }
   };
 
-  const deleteTask = (id) => {
-    setTasks((ts) => ts.filter((t) => t.id !== id));
+  const deleteTask = async (id) => {
+    if (!window.confirm("Delete this task?")) return;
+    try {
+      await API.delete(`/api/tasks/${id}`);
+      fetchTasks();
+    } catch (err) {
+      console.error("Error deleting task:", err);
+      alert("Could not delete task.");
+    }
   };
 
   return (
@@ -111,7 +119,7 @@ function TasksPage() {
                     <td>{task.priority}</td>
                     <td>{task.completed ? "Completed" : "Pending"}</td>
                     <td>
-                      <button onClick={() => toggleCompletion(task.id)}>
+                      <button onClick={() => toggleCompletion(task.id, task.completed)}>
                         {task.completed ? "Undo" : "Complete"}
                       </button>
                       <button onClick={() => deleteTask(task.id)}>Delete</button>
