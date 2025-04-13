@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: '',                // relative → Vite will proxy /api
+  baseURL: '',                // use relative URLs; Vite will proxy `/api/*` to your Flask backend
   headers: {
     'Content-Type': 'application/json'
   }
