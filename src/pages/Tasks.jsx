@@ -1,31 +1,74 @@
-import React, { useState } from "react";
-import "../styles/TasksPage.css"; 
+// src/pages/TasksPage.jsx
+import React, { useState, useEffect } from "react";
+import API from "../api";                // your axios instance
+import "../styles/TasksPage.css";
 
 function TasksPage() {
-  const [tasks, setTasks] = useState([
-    { id: 1, title: "Math Homework", deadline: "2024-01-10", priority: "High", completed: false },
-    { id: 2, title: "Science Project", deadline: "2024-01-15", priority: "Medium", completed: true },
-    { id: 3, title: "History Essay", deadline: "2024-01-20", priority: "Low", completed: false },
-  ]);
+  // state for list of tasks
+  const [tasks, setTasks] = useState([]);
+  // state for the new task form
+  const [newTask, setNewTask] = useState({
+    title: "",
+    deadline: "",
+    priority: "Low",
+  });
+  // state for loading/error
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [newTask, setNewTask] = useState({ title: "", deadline: "", priority: "Low" });
+  // Fetch tasks from backend when component mounts
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
-  const addTask = () => {
+  const fetchTasks = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      console.log("Fetching tasks from backend…");
+      const res = await API.get("/tasks");
+      console.log("Tasks fetched:", res.data);
+      setTasks(res.data);
+    } catch (err) {
+      console.error("Error fetching tasks:", err);
+      setError("Could not load tasks.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handler to add a new task via POST /add-task
+  const handleAddTask = async (e) => {
+    e.preventDefault();
     if (!newTask.title || !newTask.deadline) {
-      alert("Please fill in all fields.");
+      alert("Please fill in both title and deadline.");
       return;
     }
-    const id = tasks.length + 1;
-    setTasks([...tasks, { id, ...newTask, completed: false }]);
-    setNewTask({ title: "", deadline: "", priority: "Low" });
+
+    try {
+      console.log("Adding task:", newTask);
+      const res = await API.post("/add-task", newTask);
+      console.log("Add-task response:", res.data);
+      // Clear form
+      setNewTask({ title: "", deadline: "", priority: "Low" });
+      // Refresh list
+      fetchTasks();
+    } catch (err) {
+      console.error("Error adding task:", err);
+      alert("Failed to add task.");
+    }
   };
 
+  // Local toggle completion (you can wire this up to a PATCH endpoint later)
   const toggleCompletion = (id) => {
-    setTasks(tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)));
+    setTasks((ts) =>
+      ts.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+    );
   };
 
+  // Local delete (you can wire this up to a DELETE endpoint later)
   const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    setTasks((ts) => ts.filter((t) => t.id !== id));
   };
 
   return (
@@ -33,64 +76,88 @@ function TasksPage() {
       <h1>Manage Your Tasks</h1>
 
       {/* Add New Task Form */}
-      <div className="add-task-form">
+      <form className="add-task-form" onSubmit={handleAddTask}>
         <h2>Add New Task</h2>
+
         <input
           type="text"
           placeholder="Task Title"
           value={newTask.title}
-          onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+          onChange={(e) =>
+            setNewTask((t) => ({ ...t, title: e.target.value }))
+          }
         />
+
         <input
           type="date"
           value={newTask.deadline}
-          onChange={(e) => setNewTask({ ...newTask, deadline: e.target.value })}
+          onChange={(e) =>
+            setNewTask((t) => ({ ...t, deadline: e.target.value }))
+          }
         />
+
         <select
           value={newTask.priority}
-          onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
+          onChange={(e) =>
+            setNewTask((t) => ({ ...t, priority: e.target.value }))
+          }
         >
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-        <button onClick={addTask}>Add Task</button>
-      </div>
+
+        <button type="submit">Add Task</button>
+      </form>
+
+      {/* Loading / Error */}
+      {loading && <p>Loading tasks…</p>}
+      {error && <p className="error">{error}</p>}
 
       {/* Task List */}
-      <div className="task-list">
-        <h2>Your Tasks</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Deadline</th>
-              <th>Priority</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tasks.map((task) => (
-              <tr key={task.id} className={task.completed ? "completed" : ""}>
-                <td>{task.title}</td>
-                <td>{task.deadline}</td>
-                <td>{task.priority}</td>
-                <td>{task.completed ? "Completed" : "Pending"}</td>
-                <td>
-                  <button onClick={() => toggleCompletion(task.id)}>
-                    {task.completed ? "Undo" : "Complete"}
-                  </button>
-                  <button onClick={() => deleteTask(task.id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {!loading && !error && (
+        <div className="task-list">
+          <h2>Your Tasks</h2>
+          {tasks.length === 0 ? (
+            <p>No tasks yet.</p>
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Deadline</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tasks.map((task) => (
+                  <tr
+                    key={task.id}
+                    className={task.completed ? "completed" : ""}
+                  >
+                    <td>{task.title}</td>
+                    <td>{task.deadline}</td>
+                    <td>{task.priority}</td>
+                    <td>{task.completed ? "Completed" : "Pending"}</td>
+                    <td>
+                      <button onClick={() => toggleCompletion(task.id)}>
+                        {task.completed ? "Undo" : "Complete"}
+                      </button>
+                      <button onClick={() => deleteTask(task.id)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      )}
     </div>
   );
 }
 
 export default TasksPage;
-

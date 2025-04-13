@@ -1,8 +1,11 @@
-import axios from "axios";
+
+import axios from 'axios';
 
 const API = axios.create({
-  // default to localhost on port 5001.
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5001",
+  baseURL: 'http://localhost:5001',  // <-- explicit
+  headers: {
+    'Content-Type': 'application/json'
+  }
 });
 
 export default API;
