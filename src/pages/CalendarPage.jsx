@@ -1,30 +1,36 @@
+// src/pages/CalendarPage.jsx
+
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import API from "../api";                // your axios instance
+import API from "../api";
 import "../styles/CalendarPage.css";
 
-// format a JS Date to "YYYY-MM-DD" in local time
+// Format a Date object into a "YYYY-MM-DD" string (local time)
 function formatLocalDate(d) {
-  const y   = d.getFullYear();
-  const m   = String(d.getMonth() + 1).padStart(2, "0");
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
   return `${y}-${m}-${day}`;
 }
 
 export default function CalendarPage() {
-  const [value, setValue]   = useState(new Date());
-  const [tasks, setTasks]   = useState([]);
+  // selected calendar date
+  const [value, setValue] = useState(new Date());
+  // list of tasks fetched from backend
+  const [tasks, setTasks] = useState([]);
+  // loading / error flags
   const [loading, setLoading] = useState(true);
-  const [error, setError]   = useState(null);
+  const [error, setError] = useState(null);
 
+  // on-mount: fetch tasks once
   useEffect(() => {
     API.get("/api/tasks")
       .then((res) => {
-        // map { id, title, deadline } → { id, title, date }
+        // map each task to { id, title, date }
         const mapped = res.data.map((t) => ({
-          id:    t.id,
+          id: t.id,
           title: t.title,
-          date:  t.deadline
+          date: t.deadline,
         }));
         setTasks(mapped);
       })
@@ -35,27 +41,30 @@ export default function CalendarPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  // when user clicks a date cell
   const handleDateChange = (date) => {
     setValue(date);
-    const key = formatLocalDate(date);
-    const todays = tasks.filter((t) => t.date === key);
+    const selected = formatLocalDate(date);
+    const tasksForDate = tasks.filter((t) => t.date === selected);
 
-    if (todays.length) {
+    if (tasksForDate.length > 0) {
       alert(
-        `Tasks for ${key}:\n` +
-        todays.map((t) => `• ${t.title}`).join("\n")
+        `Tasks for ${selected}:\n` +
+          tasksForDate.map((t) => `• ${t.title}`).join("\n")
       );
     } else {
-      alert(`No tasks for ${key}`);
+      alert(`No tasks for ${selected}`);
     }
   };
 
+  // render a task title inside its date cell
   const tileContent = ({ date }) => {
     const key = formatLocalDate(date);
     const match = tasks.find((t) => t.date === key);
     return match ? <p className="tile-task-title">{match.title}</p> : null;
   };
 
+  // add a CSS class to cells that have at least one task
   const tileClassName = ({ date }) => {
     const key = formatLocalDate(date);
     return tasks.some((t) => t.date === key)
@@ -63,9 +72,11 @@ export default function CalendarPage() {
       : null;
   };
 
+  // show loading or error if needed
   if (loading) return <p>Loading calendar…</p>;
-  if (error)   return <p className="error">{error}</p>;
+  if (error) return <p className="error">{error}</p>;
 
+  // main calendar render
   return (
     <div className="calendar-page-container">
       <h1>Task Deadlines Calendar</h1>
@@ -74,7 +85,8 @@ export default function CalendarPage() {
         value={value}
         tileContent={tileContent}
         tileClassName={tileClassName}
-        calendarType="US"        // start weeks on Sunday
+        // you could disable neighbor months if desired:
+        // showNeighboringMonth={false}
       />
     </div>
   );
