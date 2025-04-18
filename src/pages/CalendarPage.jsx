@@ -21,6 +21,10 @@ export default function CalendarPage() {
   // loading / error flags
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // Task details modal
+  const [showTaskModal, setShowTaskModal] = useState(false);
+  const [selectedDateTasks, setSelectedDateTasks] = useState([]);
+  const [selectedDateStr, setSelectedDateStr] = useState("");
 
   // on-mount: fetch tasks once
   useEffect(() => {
@@ -46,22 +50,28 @@ export default function CalendarPage() {
     setValue(date);
     const selected = formatLocalDate(date);
     const tasksForDate = tasks.filter((t) => t.date === selected);
-
-    if (tasksForDate.length > 0) {
-      alert(
-        `Tasks for ${selected}:\n` +
-          tasksForDate.map((t) => `• ${t.title}`).join("\n")
-      );
-    } else {
-      alert(`No tasks for ${selected}`);
-    }
+    setSelectedDateTasks(tasksForDate);
+    setSelectedDateStr(selected);
+    setShowTaskModal(true);
   };
 
-  // render a task title inside its date cell
+  // render task titles inside date cells
   const tileContent = ({ date }) => {
     const key = formatLocalDate(date);
-    const match = tasks.find((t) => t.date === key);
-    return match ? <p className="tile-task-title">{match.title}</p> : null;
+    const matchingTasks = tasks.filter((t) => t.date === key);
+    
+    if (matchingTasks.length === 0) return null;
+    
+    return (
+      <div className="task-tile-content">
+        {matchingTasks.slice(0, 2).map((task) => (
+          <p key={task.id} className="tile-task-title">{task.title}</p>
+        ))}
+        {matchingTasks.length > 2 && (
+          <p className="tile-task-more">+{matchingTasks.length - 2} more</p>
+        )}
+      </div>
+    );
   };
 
   // add a CSS class to cells that have at least one task
@@ -85,9 +95,29 @@ export default function CalendarPage() {
         value={value}
         tileContent={tileContent}
         tileClassName={tileClassName}
-        // you could disable neighbor months if desired:
-        // showNeighboringMonth={false}
       />
+      
+      {showTaskModal && (
+        <div className="task-modal-overlay" onClick={() => setShowTaskModal(false)}>
+          <div className="task-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="task-modal-header">
+              <h2>Tasks for {selectedDateStr}</h2>
+              <button onClick={() => setShowTaskModal(false)} className="task-modal-close">×</button>
+            </div>
+            <div className="task-modal-content">
+              {selectedDateTasks.length > 0 ? (
+                <ul className="task-list">
+                  {selectedDateTasks.map((task) => (
+                    <li key={task.id} className="task-list-item">{task.title}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No tasks for this date</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,141 +1,128 @@
-/* src/styles/CalendarPage.css */
-
-/* Root theme variables */
-:root {
-  --primary-color: #000000;
-  --secondary-color: #d3d3d3;
-  --accent-color: #efefef;
-  --light-bg: #ffffff;
-  --font-family: 'Roboto', sans-serif;
-}
-
-/* Page container */
+/* Calendar container */
 .calendar-page-container {
-  text-align: center;
-  padding: 20px;
-  font-family: var(--font-family);
-}
-
-/* Base calendar styling */
-.react-calendar {
-  border: none;
-  background-color: var(--accent-color);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
+  padding: 20px;
 }
 
-/* Navigation header (month/year + arrows) */
-.react-calendar__navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.calendar-page-container h1 {
+  text-align: center;
   margin-bottom: 20px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
   color: var(--primary-color);
 }
 
-/* Nav buttons (prev/next) */
-.react-calendar__navigation button {
-  background: none;
-  border: none;
-  color: var(--primary-color);
-  font-size: 1.2rem;
-  cursor: pointer;
+/* Main Calendar Styling */
+.react-calendar {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #fff;
+  color: #222;
 }
-.react-calendar__navigation button:hover {
-  color: var(--secondary-color);
+
+/* Navigation buttons */
+.react-calendar__navigation {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  color: #333;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #f0f0f0;
 }
 
 /* Weekday headers */
 .react-calendar__month-view__weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  background-color: var(--primary-color);
-  color: var(--light-bg);
-  font-weight: bold;
   text-align: center;
-  padding: 10px 0;
-  border-radius: 5px;
-  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  padding: 8px 0;
+  color: #555;
 }
 
-/* Individual day cells */
+.react-calendar__month-view__weekdays__weekday {
+  padding: 8px 0;
+}
+
+/* Day cells */
 .react-calendar__tile {
-  height: 80px;
+  height: 120px;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid #dcdcdc;
-  font-size: 1.2rem;
-  font-weight: bold;
-  background-color: var(--light-bg);
-  color: var(--primary-color);
-  transition: background-color 0.3s, transform 0.2s;
-  padding: 8px;
+  padding: 10px;
+  position: relative;
+  border: 1px solid #eee;
+  font-size: 1em;
+  background-color: #fff;
+  color: #333;
 }
 
-/* Highlight “today” */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #f8f8f8;
+}
+
 .react-calendar__tile--now {
-  background-color: var(--accent-color);
-  border: 2px solid var(--secondary-color);
+  background-color: #fffde7;
 }
 
-/* Highlight clicked/active date */
 .react-calendar__tile--active {
-  background-color: var(--secondary-color);
-  color: var(--light-bg);
-  border-radius: 5px;
-  transform: scale(1.1);
+  background: #e3f2fd;
+  color: #0d47a1;
 }
 
-/* Hover effect */
-.react-calendar__tile:hover {
-  background-color: #f0f8ff;
-  transform: scale(1.05);
-}
-
-/* Grid layout for month view */
-.react-calendar__month-view__days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-}
-
-/* Days that have at least one task */
+/* Tiles with tasks */
 .react-calendar__tile--hasTask {
-  background-color: #ffe6e6; /* light pink */
-  font-weight: bold;
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
 }
 
-/* Task title inside a tile */
+.react-calendar__tile--hasTask:hover {
+  background-color: #d5edd6;
+}
+
+/* Task styles inside calendar cells */
 .tile-task-title {
-  color: #d60000; /* red */
-  font-size: 0.8rem;
-  margin: 2px 0 0;
-  word-break: break-word;
+  margin: 2px 0;
+  padding: 2px 4px;
+  font-size: 0.75em;
+  background-color: #bbdefb;
+  border-radius: 3px;
+  color: #0d47a1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-/* Error message styling */
-.error {
-  color: #d00;
+/* Fix for month and year view */
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  height: auto;
+  padding: 10px;
 }
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
-  .react-calendar {
-    padding: 15px;
-  }
-  .react-calendar__tile {
-    height: 60px;
-    font-size: 0.9rem;
-  }
-  .react-calendar__navigation {
-    font-size: 1.2rem;
-  }
+/* Fix for task alignment */
+.task-tile-content {
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
