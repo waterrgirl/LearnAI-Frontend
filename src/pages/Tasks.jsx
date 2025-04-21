@@ -5,7 +5,12 @@ import "../styles/TasksPage.css";
 
 function TasksPage() {
   const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState({ title: "", deadline: "", priority: "Low" });
+  const [newTask, setNewTask] = useState({ 
+    title: "", 
+    deadline: "", 
+    priority: "Low",
+    description: "" 
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,7 +40,7 @@ function TasksPage() {
     }
     try {
       await API.post("/api/add-task", newTask);
-      setNewTask({ title: "", deadline: "", priority: "Low" });
+      setNewTask({ title: "", deadline: "", priority: "Low", description: "" });
       fetchTasks();
     } catch (err) {
       console.error("Error adding task:", err);
@@ -89,6 +94,12 @@ function TasksPage() {
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
+        <textarea
+          placeholder="Task Description (optional)"
+          value={newTask.description}
+          onChange={(e) => setNewTask((t) => ({ ...t, description: e.target.value }))}
+          rows="3"
+        ></textarea>
         <button type="submit">Add Task</button>
       </form>
 
@@ -107,6 +118,7 @@ function TasksPage() {
                   <th>Title</th>
                   <th>Deadline</th>
                   <th>Priority</th>
+                  <th>Category</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -114,9 +126,12 @@ function TasksPage() {
               <tbody>
                 {tasks.map((task) => (
                   <tr key={task.id} className={task.completed ? "completed" : ""}>
-                    <td>{task.title}</td>
+                    <td className="task-title" title={task.description || ""}>
+                      {task.title}
+                    </td>
                     <td>{task.deadline}</td>
                     <td>{task.priority}</td>
+                    <td>{task.category || "General"}</td>
                     <td>{task.completed ? "Completed" : "Pending"}</td>
                     <td>
                       <button onClick={() => toggleCompletion(task.id, task.completed)}>

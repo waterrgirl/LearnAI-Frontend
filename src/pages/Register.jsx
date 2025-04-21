@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import API from "../api";
 import "../styles/RegisterPage.css";
 
 function RegisterPage() {
@@ -10,9 +13,18 @@ function RegisterPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  // Check if user is already logged in
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      navigate('/tasks');
+    }
+  }, [navigate]);
 
   const handleRegister = async (e) => {
-    e.preventDefault(); // Prevent page refresh
+    e.preventDefault();
     setErrorMessage("");
     setSuccessMessage("");
     setLoading(true);
@@ -30,26 +42,44 @@ function RegisterPage() {
       return;
     }
 
+    if (password.length < 6) {
+      setErrorMessage("Password must be at least 6 characters.");
+      setLoading(false);
+      return;
+    }
+
     try {
-      // Replace with your back-end API endpoint
-      const response = await axios.post("http://<your-backend-url>/register", {
-        name,
-        email,
-        password,
+      // Create user directly with Firebase SDK
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      // Get ID token for authentication
+      const idToken = await user.getIdToken();
+      
+      // Register with backend - only save user data in Firestore, not creating Auth user again
+      await API.post("/api/register", {
+        idToken: idToken,  // Send the ID token instead of credentials
+        name: name,        // Still send the name for profile info
       });
 
-      // Handle successful registration
-      console.log("Registration successful:", response.data);
       setSuccessMessage("Account created successfully! You can now log in.");
       setName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+      
+      // Redirect to login after successful registration
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     } catch (error) {
-      console.error("Registration error:", error.response);
-      setErrorMessage(
-        error.response?.data?.message || "An error occurred during registration."
-      );
+      console.error("Registration error:", error);
+      
+      if (error.code === "auth/email-already-in-use") {
+        setErrorMessage("This email is already in use. Please try another email or login.");
+      } else {
+        setErrorMessage(`Registration failed: ${error.message}`);
+      }
     } finally {
       setLoading(false);
     }

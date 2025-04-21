@@ -7,9 +7,9 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     proxy: {
-      // Proxy any request starting with /api to Flask on port 5001
+      // Proxy any request starting with /api to Django on port 8000
       '/api': {
-        target: 'http://localhost:5001',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '/api')
       }

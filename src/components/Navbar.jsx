@@ -29,6 +29,7 @@ function Navbar() {
         <li><Link to="/login" onClick={toggleMenu}>LogIn</Link></li>
         <li><Link to="/register" onClick={toggleMenu}>Signup</Link></li>
         <li><Link to="/settings" onClick={toggleMenu}>Settings</Link></li>
+        <li><Link to="/profile" className="nav-link">Profile</Link></li>
       </ul>
     </nav>
   );

@@ -22,10 +22,18 @@ function ContactUsPage() {
       setLoading(false);
       return;
     }
+    
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMessage("Please enter a valid email address.");
+      setLoading(false);
+      return;
+    }
 
     try {
-      // Replace with your back-end endpoint for submitting contact messages
-      const response = await axios.post("http://<your-backend-url>/contact", {
+      // Send the form data to your Flask backend API
+      const response = await axios.post("http://localhost:5001/api/contact", {
         name,
         email,
         message,
@@ -37,7 +45,7 @@ function ContactUsPage() {
       setMessage("");
       console.log("Contact submission successful:", response.data);
     } catch (error) {
-      console.error("Error submitting contact form:", error.response);
+      console.error("Error submitting contact form:", error);
       setErrorMessage(
         error.response?.data?.message || "An error occurred. Please try again later."
       );
@@ -56,6 +64,7 @@ function ContactUsPage() {
           <input
             type="text"
             id="name"
+            className="form-control"
             placeholder="Enter your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -67,6 +76,7 @@ function ContactUsPage() {
           <input
             type="email"
             id="email"
+            className="form-control"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -77,6 +87,7 @@ function ContactUsPage() {
           <label htmlFor="message">Message</label>
           <textarea
             id="message"
+            className="form-control"
             placeholder="Enter your message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -86,7 +97,7 @@ function ContactUsPage() {
         </div>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         {successMessage && <p className="success-message">{successMessage}</p>}
-        <button type="submit" className="submit-button" disabled={loading}>
+        <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading ? "Sending..." : "Submit"}
         </button>
       </form>
