@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getAuth, updatePassword } from "firebase/auth";
 import axios from "axios";
 import "../styles/SettingsPage.css";
 
@@ -10,15 +12,63 @@ function SettingsPage() {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingPreferences, setLoadingPreferences] = useState(true);
+  const navigate = useNavigate();
+  const auth = getAuth();
 
+  // Load user preferences on component mount
+  useEffect(() => {
+    const fetchUserPreferences = async () => {
+      const userData = JSON.parse(localStorage.getItem('user'));
+      
+      if (!userData || !userData.token) {
+        navigate('/login');
+        return;
+      }
+
+      try {
+        // We could make an API call to get current preferences
+        // For now, just showing how to use the token
+        const response = await axios.post("/api/verify-token", {
+          idToken: userData.token,
+        });
+        
+        // If we had stored preferences, we could set them here
+        // For this example, using defaults
+        setEmailNotifications(response.data?.preferences?.emailNotifications ?? true);
+        setPushNotifications(response.data?.preferences?.pushNotifications ?? false);
+      } catch (error) {
+        console.error("Error fetching preferences:", error);
+        // If token is invalid, redirect to login
+        if (error.response?.status === 401) {
+          localStorage.removeItem('user');
+          navigate('/login');
+        }
+      } finally {
+        setLoadingPreferences(false);
+      }
+    };
+
+    fetchUserPreferences();
+  }, [navigate]);
+
+  // Save notification preferences
   const handleSavePreferences = async () => {
     setSuccessMessage("");
     setErrorMessage("");
     setLoading(true);
 
+    const userData = JSON.parse(localStorage.getItem('user'));
+    
+    if (!userData || !userData.token) {
+      setErrorMessage("You need to be logged in");
+      navigate('/login');
+      return;
+    }
+
     try {
-      // Replace with your back-end endpoint for saving preferences
-      const response = await axios.post("http://<your-backend-url>/update-preferences", {
+      const response = await axios.post("/api/update-preferences", {
+        idToken: userData.token,
         emailNotifications,
         pushNotifications,
       });
@@ -26,15 +76,23 @@ function SettingsPage() {
       setSuccessMessage("Preferences updated successfully!");
       console.log("Preferences updated:", response.data);
     } catch (error) {
-      console.error("Error updating preferences:", error.response);
-      setErrorMessage(
-        error.response?.data?.message || "An error occurred while updating preferences."
-      );
+      console.error("Error updating preferences:", error);
+      
+      if (error.response?.status === 401) {
+        setErrorMessage("Your session has expired. Please log in again.");
+        localStorage.removeItem('user');
+        setTimeout(() => navigate('/login'), 2000);
+      } else {
+        setErrorMessage(
+          error.response?.data?.error || "An error occurred while updating preferences."
+        );
+      }
     } finally {
       setLoading(false);
     }
   };
 
+  // Change password
   const handleChangePassword = async () => {
     setSuccessMessage("");
     setErrorMessage("");
@@ -52,25 +110,68 @@ function SettingsPage() {
       return;
     }
 
-    try {
-      // Replace with your back-end endpoint for changing password
-      const response = await axios.post("http://<your-backend-url>/change-password", {
-        password,
-      });
+    if (password.length < 6) {
+      setErrorMessage("Password must be at least 6 characters.");
+      setLoading(false);
+      return;
+    }
 
-      setSuccessMessage("Password changed successfully!");
-      setPassword("");
-      setConfirmPassword("");
-      console.log("Password changed:", response.data);
+    const userData = JSON.parse(localStorage.getItem('user'));
+    
+    if (!userData || !userData.token) {
+      setErrorMessage("You need to be logged in");
+      navigate('/login');
+      return;
+    }
+
+    try {
+      // First, update password in Firebase Authentication
+      const currentUser = auth.currentUser;
+      
+      if (currentUser) {
+        await updatePassword(currentUser, password);
+        
+        // Then update through our backend for audit/logging purposes
+        await axios.post("/api/change-password", {
+          idToken: userData.token,
+          password,
+        });
+
+        setSuccessMessage("Password changed successfully!");
+        setPassword("");
+        setConfirmPassword("");
+      } else {
+        // User needs to reauthenticate
+        setErrorMessage("For security reasons, please log in again before changing your password.");
+        localStorage.removeItem('user');
+        setTimeout(() => navigate('/login'), 2000);
+      }
     } catch (error) {
-      console.error("Error changing password:", error.response);
-      setErrorMessage(
-        error.response?.data?.message || "An error occurred while changing the password."
-      );
+      console.error("Error changing password:", error);
+      
+      if (error.code === 'auth/requires-recent-login') {
+        setErrorMessage("For security reasons, please log in again before changing your password.");
+        localStorage.removeItem('user');
+        setTimeout(() => navigate('/login'), 2000);
+      } else {
+        setErrorMessage(
+          error.response?.data?.error || error.message || "An error occurred while changing the password."
+        );
+      }
     } finally {
       setLoading(false);
     }
   };
+
+  // If still loading preferences, show loading indicator
+  if (loadingPreferences) {
+    return (
+      <div className="settings-page">
+        <h1>Settings</h1>
+        <p>Loading preferences...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="settings-page">
@@ -79,23 +180,27 @@ function SettingsPage() {
       {/* Notification Preferences */}
       <div className="settings-section">
         <h2>Notification Preferences</h2>
-        <label>
+        <label className="checkbox-label">
           <input
             type="checkbox"
             checked={emailNotifications}
             onChange={() => setEmailNotifications(!emailNotifications)}
           />
-          Enable Email Notifications
+          <span>Enable Email Notifications</span>
         </label>
-        <label>
+        <label className="checkbox-label">
           <input
             type="checkbox"
             checked={pushNotifications}
             onChange={() => setPushNotifications(!pushNotifications)}
           />
-          Enable Push Notifications
+          <span>Enable Push Notifications</span>
         </label>
-        <button onClick={handleSavePreferences} disabled={loading}>
+        <button 
+          className="settings-button"
+          onClick={handleSavePreferences} 
+          disabled={loading}
+        >
           {loading ? "Saving..." : "Save Preferences"}
         </button>
       </div>
@@ -103,19 +208,29 @@ function SettingsPage() {
       {/* Change Password */}
       <div className="settings-section">
         <h2>Change Password</h2>
-        <input
-          type="password"
-          placeholder="New Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Confirm New Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <button onClick={handleChangePassword} disabled={loading}>
+        <div className="form-group">
+          <input
+            type="password"
+            placeholder="New Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="settings-input"
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="password"
+            placeholder="Confirm New Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="settings-input"
+          />
+        </div>
+        <button 
+          className="settings-button"
+          onClick={handleChangePassword} 
+          disabled={loading}
+        >
           {loading ? "Updating..." : "Change Password"}
         </button>
       </div>
