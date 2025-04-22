@@ -17,6 +17,16 @@ function HomePage() {
               <span className="brand-text">LearnAI</span>
             </h1>
             <p>Your personalized academic assistant, powered by AI. Manage tasks, track progress, and stay ahead of deadlines.</p>
+            <div className="header-buttons">
+              {authenticated ? (
+                <Link to="/tasks" className="btn">My Tasks</Link>
+              ) : (
+                <>
+                  <Link to="/login" className="btn">Login</Link>
+                  <Link to="/register" className="btn btn-secondary">Sign Up</Link>
+                </>
+              )}
+            </div>
           </div>
           <div className="logo-container">
             <img src="/src/assets/LearnAI-Slogan(nobg).png" alt="LearnAI Logo" className="custom-logo" />
@@ -24,7 +34,7 @@ function HomePage() {
         </div>
       </header>
 
-      {/* Features Section */}
+      {/* Features Section - Keeping this as is */}
       <section className="features">
         <div className="container">
           <h2>Smart Features for Academic Success</h2>
