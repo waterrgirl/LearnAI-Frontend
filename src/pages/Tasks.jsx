@@ -24,6 +24,10 @@ function TasksPage() {
     try {
       const res = await API.get("/api/tasks");
       setTasks(res.data);
+      
+      // Dispatch a custom event to notify other components
+      // that tasks have been updated
+      window.dispatchEvent(new CustomEvent('tasksUpdated'));
     } catch (err) {
       console.error("Error fetching tasks:", err);
       setError("Could not load tasks.");
@@ -41,7 +45,7 @@ function TasksPage() {
     try {
       await API.post("/api/add-task", newTask);
       setNewTask({ title: "", deadline: "", priority: "Low", description: "" });
-      fetchTasks();
+      fetchTasks(); // Will dispatch the tasksUpdated event
     } catch (err) {
       console.error("Error adding task:", err);
       alert("Failed to add task.");
@@ -51,7 +55,7 @@ function TasksPage() {
   const toggleCompletion = async (id, current) => {
     try {
       await API.patch(`/api/tasks/${id}`, { completed: !current });
-      fetchTasks();
+      fetchTasks(); // Will dispatch the tasksUpdated event
     } catch (err) {
       console.error("Error updating task:", err);
       alert("Could not update task status.");
@@ -62,7 +66,7 @@ function TasksPage() {
     if (!window.confirm("Delete this task?")) return;
     try {
       await API.delete(`/api/tasks/${id}`);
-      fetchTasks();
+      fetchTasks(); // Will dispatch the tasksUpdated event
     } catch (err) {
       console.error("Error deleting task:", err);
       alert("Could not delete task.");

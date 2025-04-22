@@ -1,0 +1,124 @@
+.notifications-container {
+  position: relative;
+}
+
+.notification-bell {
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: relative;
+  padding: 5px;
+  color: #000000;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ff4d4f;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.notifications-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  padding: 10px;
+}
+
+.notifications-dropdown h3 {
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 1rem;
+  color: #333;
+}
+
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-item {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.notification-item:hover {
+  background-color: #f5f5f5;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-message {
+  font-size: 0.85rem;
+  color: #333;
+  flex: 1;
+  text-align: left;
+}
+
+.notification-priority {
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background-color: #eee;
+  margin-left: 8px;
+}
+
+.notification-overdue {
+  background-color: #fff1f0;
+  border-left: 3px solid #f5222d;
+  font-weight: bold;
+}
+
+.notification-urgent {
+  background-color: #fff2f0;
+  border-left: 3px solid #ff4d4f;
+}
+
+.notification-soon {
+  background-color: #fffbe6;
+  border-left: 3px solid #faad14;
+}
+
+.notification-upcoming {
+  background-color: #f6ffed;
+  border-left: 3px solid #52c41a;
+}
+
+.loading-text,
+.error-text,
+.no-notifications {
+  padding: 15px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.error-text {
+  color: #ff4d4f;
+}
