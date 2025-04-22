@@ -65,19 +65,36 @@
     height: 100%;
   }
   
-  /* Logo styling */
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    z-index: 1002; /* Above mobile menu */
+/* Logo styling */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  z-index: 1002; /* Above mobile menu */
+}
+
+.nav-logo img {
+  height: 45px; /* Increased from 32px to match other elements */
+  width: auto;
+  margin-top: 2px; /* Small adjustment to vertically center */
+}
+  
+/* For smaller screens, maintain proportional sizing */
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 1rem;
   }
   
+  .notifications-dropdown {
+    width: calc(100vw - 32px);
+    left: 16px;
+    right: 16px;
+  }
+
   .nav-logo img {
-    height: 32px;
-    width: auto;
+    height: 38px; /* Slightly smaller but still proportionate */
   }
-  
+}
   /* Main navigation menu */
   .nav-menu {
     display: flex;
@@ -143,37 +160,42 @@
     z-index: 1002; /* Above mobile menu */
   }
   
-  /* Notification bell */
-  .notification-bell {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    color: var(--neutral-700);
-    transition: all 0.2s ease;
-    background: transparent;
-    border: none;
-  }
+/* Notification bell */
+.notification-bell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;  /* Increased from 36px to match burger menu size */
+  height: 40px; /* Increased from 36px to match burger menu size */
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  color: var(--neutral-700);
+  transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+}
   
   .notification-bell:hover {
     background-color: var(--neutral-100);
     color: var(--primary-color);
   }
   
-  .notification-badge {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 8px;
-    height: 8px;
-    border-radius: var(--radius-full);
-    background-color: var(--primary-color);
-    border: 2px solid white;
-  }
+/* Adjust badge position for larger bell */
+.notification-badge {
+  position: absolute;
+  top: 8px;    /* Adjusted from 4px */
+  right: 8px;  /* Adjusted from 4px */
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--primary-color);
+  border: 2px solid white;
+}
+.notification-bell i,
+.notification-bell svg {
+  font-size: 20px; /* Ensuring icon size is appropriate */
+}
   
   /* Mobile hamburger button */
   .burger-menu {
@@ -215,24 +237,28 @@
     display: flex;
   }
   
+  /* Side drawer navigation menu */
   .nav-menu {
     position: fixed;
     top: var(--navbar-height); /* Below navbar */
-    left: 0;
-    right: 0;
+    right: 0; /* Position from right side */
+    width: 280px; /* Fixed width for side drawer */
+    max-width: 80%; /* Never wider than 80% on very small screens */
+    height: calc(100vh - var(--navbar-height)); /* Full height minus navbar */
     background-color: white;
     box-shadow: var(--shadow-md);
-    height: 0;
-    overflow: hidden;
-    transition: height 0.3s ease, visibility 0s 0.3s; /* Delay visibility change until after height animation */
+    transform: translateX(100%); /* Start off-screen to the right */
+    transition: transform 0.3s ease, visibility 0s 0.3s; /* Slide in from right */
     visibility: hidden;
     z-index: 1001;
+    overflow-y: auto; /* Allow scrolling if menu is taller than screen */
+    border-left: 1px solid var(--neutral-100);
   }
   
   .nav-menu.open {
-    height: calc(100vh - var(--navbar-height)); /* Full viewport minus navbar */
+    transform: translateX(0); /* Slide in to visible position */
     visibility: visible;
-    transition: height 0.3s ease, visibility 0s 0s; /* No delay on visibility when showing */
+    transition: transform 0.3s ease, visibility 0s 0s; /* No delay on visibility when showing */
   }
   
   .nav-menu ul {
@@ -248,10 +274,15 @@
   }
   
   .nav-menu a {
-    padding: 1rem 1.5rem;
+    padding: 0.875rem 1.5rem;
     width: 100%;
-    justify-content: center;
+    justify-content: flex-start; /* Left-align text */
     height: auto;
+    border-bottom: 1px solid var(--neutral-50);
+  }
+  
+  .nav-menu li:last-child a {
+    border-bottom: none;
   }
   
   .nav-menu a::after {
@@ -363,6 +394,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
     animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(2px); /* Subtle blur effect for modern browsers */
   }
   
   .page-overlay.active {
@@ -387,6 +419,6 @@
     }
   
     .nav-logo img {
-      height: 28px;
+      height: 35px;
     }
   }

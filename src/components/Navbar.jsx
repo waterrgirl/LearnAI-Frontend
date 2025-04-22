@@ -74,6 +74,9 @@ function Navbar() {
 
           <div className={`nav-menu ${menuOpen ? 'open' : ''}`}>
             <ul>
+              {/* Home link added at the top of the menu */}
+              <li><Link to="/" className={isActive('/')} onClick={closeMenu}>Home</Link></li>
+              
               {authenticated ? (
                 <>
                   <li><Link to="/tasks" className={isActive('/tasks')} onClick={closeMenu}>Tasks</Link></li>
