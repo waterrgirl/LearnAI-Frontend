@@ -61,10 +61,11 @@ function Navbar() {
               
               {authenticated ? (
                 <>
+                  <li><Link to="/dashboard" className={isActive('/dashboard')} onClick={closeMenu}>Dashboard</Link></li>
                   <li><Link to="/tasks" className={isActive('/tasks')} onClick={closeMenu}>Tasks</Link></li>
                   <li><Link to="/progress" className={isActive('/progress')} onClick={closeMenu}>Progress</Link></li>
                   <li><Link to="/calendar" className={isActive('/calendar')} onClick={closeMenu}>Calendar</Link></li>
-                  <li><Link to="/notifications" className={isActive('/notifications')} onClick={closeMenu}>Notifications</Link></li>
+                  {/* Removed Notifications link from here */}
                   <li><Link to="/settings" className={isActive('/settings')} onClick={closeMenu}>Settings</Link></li>
                   
                   {/* Divider for informational pages */}
