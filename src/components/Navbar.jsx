@@ -65,7 +65,6 @@ function Navbar() {
                   <li><Link to="/tasks" className={isActive('/tasks')} onClick={closeMenu}>Tasks</Link></li>
                   <li><Link to="/progress" className={isActive('/progress')} onClick={closeMenu}>Progress</Link></li>
                   <li><Link to="/calendar" className={isActive('/calendar')} onClick={closeMenu}>Calendar</Link></li>
-                  {/* Removed Notifications link from here */}
                   <li><Link to="/settings" className={isActive('/settings')} onClick={closeMenu}>Settings</Link></li>
                   
                   {/* Divider for informational pages */}
@@ -75,7 +74,6 @@ function Navbar() {
                   
                   {/* Second divider for profile */}
                   <li className="nav-divider"></li>
-                  <li><Link to="/profile" className={isActive('/profile')} onClick={closeMenu}>Profile</Link></li>
                 </>
               ) : (
                 <>
