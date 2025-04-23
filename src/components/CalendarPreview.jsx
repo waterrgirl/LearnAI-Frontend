@@ -17,7 +17,7 @@ function CalendarPreview() {
         // Get tasks with upcoming deadlines (within next 7 days)
         const now = new Date();
         const nextWeek = new Date(now);
-        nextWeek.setDate(now.getDate() + 7);
+        nextWeek.setDate(now.getDate() + 14); // Show tasks for next two weeks
         
         const upcoming = tasks
           .filter(task => {
@@ -41,45 +41,74 @@ function CalendarPreview() {
   }, []);
 
   const formatDate = (dateString) => {
-    const options = { weekday: 'short', month: 'short', day: 'numeric' };
+    const options = { weekday: 'short', day: 'numeric', month: 'short' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
+  
+  const formatDay = (dateString) => {
+    return new Date(dateString).getDate();
+  };
+  
+  const formatMonth = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', { month: 'short' });
+  };
+  
+  const formatWeekday = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', { weekday: 'short' });
+  };
+
+  if (loading) {
+    return (
+      <div className="calendar-preview-loading">
+        <i className="fas fa-calendar fa-spin"></i>
+        <p>Loading your deadlines...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="calendar-preview-error">
+        <i className="fas fa-exclamation-circle"></i>
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (upcomingEvents.length === 0) {
+    return (
+      <div className="calendar-preview-empty">
+        <i className="far fa-calendar"></i>
+        <p>No upcoming deadlines in the next two weeks.</p>
+        <Link to="/tasks" className="add-task-btn">
+          <i className="fas fa-plus"></i> Add a task
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <div className="dashboard-section calendar-preview">
-      <div className="section-header">
-        <h2>Upcoming Deadlines</h2>
-        <Link to="/calendar" className="view-all">View Calendar</Link>
-      </div>
-      
-      <div className="calendar-content">
-        {loading ? (
-          <p className="loading">Loading calendar events...</p>
-        ) : error ? (
-          <p className="error">{error}</p>
-        ) : upcomingEvents.length === 0 ? (
-          <p className="no-data">No upcoming deadlines in the next week.</p>
-        ) : (
-          <ul className="event-list">
-            {upcomingEvents.map(event => (
-              <li key={event.id} className="event-item">
-                <div className="event-date">
-                  <span className="date-number">{new Date(event.deadline).getDate()}</span>
-                  <span className="date-month">{new Date(event.deadline).toLocaleDateString('en-US', { month: 'short' })}</span>
-                </div>
-                <div className="event-info">
-                  <h4 className="event-title">{event.title}</h4>
-                  <p className="event-time">{formatDate(event.deadline)}</p>
-                </div>
-                <div className="event-priority">
-                  <span className={`priority-badge ${event.priority?.toLowerCase()}`}>
-                    {event.priority || 'Medium'}
+    <div className="calendar-preview-content">
+      <div className="upcoming-events">
+        {upcomingEvents.map((event, index) => (
+          <div key={event.id || index} className="event-item">
+            <div className="event-date">
+              <div className="date-number">{formatDay(event.deadline)}</div>
+              <div className="date-month">{formatMonth(event.deadline)}</div>
+            </div>
+            <div className="event-details">
+              <h3 className="event-title">{event.title}</h3>
+              <div className="event-meta">
+                <span className="event-day">{formatWeekday(event.deadline)}, {formatDay(event.deadline)} {formatMonth(event.deadline)}</span>
+                {event.priority && (
+                  <span className={`priority-badge ${event.priority.toLowerCase()}`}>
+                    {event.priority}
                   </span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -4,6 +4,9 @@ import axios from 'axios';
 import { auth } from "../firebase";
 import API from "../api";
 import '../styles/Dashboard.css';
+import TaskSummary from "../components/TaskSummary";
+import CalendarPreview from "../components/CalendarPreview";
+import ProgressSummary from "../components/ProgressSummary";
 
 function Dashboard() {
   const [userData, setUserData] = useState({});
@@ -254,13 +257,7 @@ function Dashboard() {
                   View Calendar <i className="fas fa-chevron-right"></i>
                 </Link>
               </div>
-              <div className="calendar-preview">
-                <div className="no-data-placeholder">
-                  <i className="far fa-calendar"></i>
-                  <p>Your upcoming deadlines will appear here.</p>
-                  <Link to="/tasks/new" className="add-task-btn">Add a task</Link>
-                </div>
-              </div>
+              <CalendarPreview />
             </div>
 
             {/* Progress overview */}
@@ -341,7 +338,7 @@ function Dashboard() {
             <div className="dashboard-card quick-actions">
               <h2>Quick Actions</h2>
               <div className="action-buttons">
-                <Link to="/tasks/new" className="action-button">
+                <Link to="/tasks" className="action-button">
                   <i className="fas fa-plus"></i>
                   <span>New Task</span>
                 </Link>
