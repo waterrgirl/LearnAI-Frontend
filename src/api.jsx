@@ -47,4 +47,25 @@ export const getCurrentUser = () => {
   }
 };
 
+export const get = async (url) => {
+  // Get the user data from localStorage
+  const userData = JSON.parse(localStorage.getItem('user') || '{}');
+  const userId = userData.uid || '';
+  const token = userData.token || '';
+  
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-User-ID': userId,
+    }
+  };
+  
+  // Add Authorization header if token exists
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
+  
+  const response = await axios.get(`${API_BASE_URL}${url}`, config);
+  return response;
+};
 export default API;

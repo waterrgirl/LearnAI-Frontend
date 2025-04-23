@@ -1,54 +1,112 @@
+/* Basic container positioning */
 .notifications-container {
   position: relative;
+  z-index: 1010; /* Ensure it's above other elements */
+  display: inline-block;
 }
 
-.notification-bell {
+/* Create a better click target */
+.notification-bell-wrapper {
   cursor: pointer;
-  font-size: 1.5rem;
-  position: relative;
-  padding: 5px;
-  color: #000000;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
 }
 
+.notification-bell-wrapper:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Badge for notification count */
 .notification-badge {
   position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: #ff4d4f;
+  top: 0;
+  right: 0;
+  min-width: 16px;
+  height: 16px;
+  background-color: #f56565;
   color: white;
   border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 0.7rem;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  padding: 2px;
 }
 
+/* Dropdown container */
 .notifications-dropdown {
   position: absolute;
-  top: 40px;
-  right: 0;
-  width: 300px;
+  top: 100%;
+  right: -10px;
+  width: 320px;
   max-height: 400px;
-  overflow-y: auto;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  padding: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1010;
+  margin-top: 8px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  animation: fadeIn 0.2s ease-out;
 }
 
-.notifications-dropdown h3 {
-  margin: 0;
-  padding: 10px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header of the dropdown */
+.notifications-header {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #eee;
-  text-align: left;
-  font-size: 1rem;
-  color: #333;
+  background-color: #f9fafb;
 }
 
+.notifications-header h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.mark-read-btn {
+  background: transparent;
+  border: none;
+  color: #3b82f6;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mark-read-btn:hover {
+  text-decoration: underline;
+  color: #2563eb;
+}
+
+/* Content area */
+.notifications-content {
+  overflow-y: auto;
+  max-height: 320px;
+}
+
+/* List of notifications */
 .notifications-list {
   list-style: none;
   padding: 0;
@@ -56,7 +114,7 @@
 }
 
 .notification-item {
-  padding: 12px 15px;
+  padding: 12px 16px;
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
@@ -65,39 +123,41 @@
   transition: background-color 0.2s;
 }
 
-.notification-item:hover {
-  background-color: #f5f5f5;
-}
-
 .notification-item:last-child {
   border-bottom: none;
 }
 
+.notification-item:hover {
+  background-color: #f9fafb;
+}
+
+/* Message in notification item */
 .notification-message {
   font-size: 0.85rem;
-  color: #333;
+  color: #4b5563;
   flex: 1;
-  text-align: left;
 }
 
+/* Priority badge */
 .notification-priority {
-  font-size: 0.75rem;
-  font-weight: bold;
+  font-size: 0.7rem;
+  font-weight: 600;
   padding: 3px 6px;
   border-radius: 4px;
-  background-color: #eee;
+  background-color: #f3f4f6;
   margin-left: 8px;
+  text-transform: uppercase;
 }
 
+/* Notification types */
 .notification-overdue {
   background-color: #fff1f0;
   border-left: 3px solid #f5222d;
-  font-weight: bold;
 }
 
 .notification-urgent {
-  background-color: #fff2f0;
-  border-left: 3px solid #ff4d4f;
+  background-color: #fff7e6;
+  border-left: 3px solid #fa8c16;
 }
 
 .notification-soon {
@@ -110,15 +170,45 @@
   border-left: 3px solid #52c41a;
 }
 
+/* Info messages */
 .loading-text,
 .error-text,
 .no-notifications {
-  padding: 15px;
+  padding: 24px 16px;
   text-align: center;
-  color: #666;
+  color: #6b7280;
   font-size: 0.9rem;
 }
 
 .error-text {
-  color: #ff4d4f;
+  color: #ef4444;
+}
+
+/* Footer section with "See all" link */
+.notifications-footer {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #eee;
+  background-color: #f9fafb;
+}
+
+.see-all-link {
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.see-all-link:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.see-all-link i {
+  font-size: 0.7rem;
 }

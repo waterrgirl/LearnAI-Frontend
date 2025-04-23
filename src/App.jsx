@@ -13,6 +13,7 @@ import AboutUs from "./pages/AboutUs";
 import Footer from "./components/Footer";
 import ProfilePage from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import NotificationsPage from "./pages/NotificationsPage"; // Make sure this is imported
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
         <Route path="/calendar" element={
           <ProtectedRoute>
             <CalendarPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/notifications" element={
+          <ProtectedRoute>
+            <NotificationsPage />
           </ProtectedRoute>
         } />
         <Route path="/login" element={<Login />} />
