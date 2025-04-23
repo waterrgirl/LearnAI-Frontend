@@ -12,51 +12,55 @@ import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import Footer from "./components/Footer";
 import ProfilePage from "./pages/Profile";
+import NotificationsPage from "./pages/NotificationsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import NotificationsPage from "./pages/NotificationsPage"; // Make sure this is imported
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/tasks" element={
-          <ProtectedRoute>
-            <Tasks />
-          </ProtectedRoute>
-        } />
-        <Route path="/progress" element={
-          <ProtectedRoute>
-            <Progress />
-          </ProtectedRoute>
-        } />
-        <Route path="/calendar" element={
-          <ProtectedRoute>
-            <CalendarPage />
-          </ProtectedRoute>
-        } />
-        <Route path="/notifications" element={
-          <ProtectedRoute>
-            <NotificationsPage />
-          </ProtectedRoute>
-        } />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/settings" element={
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>
-        } />
-        <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/profile" element={
-          <ProtectedRoute>
-            <ProfilePage />
-          </ProtectedRoute>
-        } />
-      </Routes>
-      <Footer />
+      <div className="app-container">
+        <Navbar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tasks" element={
+              <ProtectedRoute>
+                <Tasks />
+              </ProtectedRoute>
+            } />
+            <Route path="/progress" element={
+              <ProtectedRoute>
+                <Progress />
+              </ProtectedRoute>
+            } />
+            <Route path="/calendar" element={
+              <ProtectedRoute>
+                <CalendarPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/notifications" element={
+              <ProtectedRoute>
+                <NotificationsPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            } />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }

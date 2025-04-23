@@ -17,7 +17,17 @@ function Notifications() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
+  console.log("Rendering notifications component");
 
+  const handleBellClick = (e) => {
+    console.log("Bell clicked!");
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setShowDropdown(prev => !prev);
+  };
+  
   // Handle clicks outside of the dropdown
   useEffect(() => {
     function handleClickOutside(event) {
@@ -113,12 +123,6 @@ function Notifications() {
     }
   };
 
-  // Toggle dropdown on bell click - with debugging
-  const handleBellClick = () => {
-    console.log("Bell clicked, toggling dropdown");
-    setShowDropdown(prevState => !prevState);
-  };
-
   const handleTaskClick = (taskId) => {
     // Navigate to tasks page
     navigate('/tasks');
@@ -150,14 +154,16 @@ function Notifications() {
 
   return (
     <div className="notifications-container">
-      <div 
-        className="notification-bell-wrapper"
+      <button 
+        type="button"
+        className="notification-bell" 
         onClick={handleBellClick}
         ref={buttonRef}
+        style={{cursor: 'pointer'}}
       >
         <i className="fas fa-bell"></i>
         {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
-      </div>
+      </button>
 
       {showDropdown && (
         <div className="notifications-dropdown" ref={dropdownRef}>
