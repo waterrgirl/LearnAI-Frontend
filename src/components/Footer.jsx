@@ -30,10 +30,11 @@ function Footer() {
         <div className="footer-section">
           <h3>Resources</h3>
           <ul className="footer-links">
-            <li><Link to="/about-us"><i className="fas fa-chevron-right"></i> About Us</Link></li>
-            <li><Link to="/contact-us"><i className="fas fa-chevron-right"></i> Contact Us</Link></li>
+            <li><Link to="/about"><i className="fas fa-chevron-right"></i> About LearnAI</Link></li>
+            <li><Link to="/faq"><i className="fas fa-chevron-right"></i> FAQ</Link></li>
             <li><Link to="/privacy"><i className="fas fa-chevron-right"></i> Privacy Policy</Link></li>
             <li><Link to="/terms"><i className="fas fa-chevron-right"></i> Terms of Service</Link></li>
+            <li><Link to="/help"><i className="fas fa-chevron-right"></i> Help Center</Link></li>
           </ul>
         </div>
         

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";  // Import Dashboard component
+import Dashboard from "./pages/Dashboard"; 
 import Tasks from "./pages/Tasks";
 import Progress from "./pages/Progress";
 import CalendarPage from "./pages/CalendarPage";
@@ -15,7 +15,10 @@ import Footer from "./components/Footer";
 import ProfilePage from "./pages/Profile";
 import NotificationsPage from "./pages/NotificationsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import SuggestionsPage from "./pages/Suggestions";  // Import Suggestions page
+import SuggestionsPage from "./pages/Suggestions"; 
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+ 
 
 function App() {
   return (
@@ -69,6 +72,12 @@ function App() {
                 <ProfilePage />
               </ProtectedRoute>
             } />
+            
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/help" element={<ContactUs />} /> 
+            <Route path="/about" element={<AboutUs />} /> 
+        
           </Routes>
         </main>
         <Footer />

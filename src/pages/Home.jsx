@@ -19,7 +19,7 @@ function HomePage() {
             <p>Your personalized academic assistant, powered by AI. Manage tasks, track progress, and stay ahead of deadlines.</p>
             <div className="header-buttons">
               {authenticated ? (
-                <Link to="/tasks" className="btn">My Tasks</Link>
+                <Link to="/Dashboard" className="btn">My Dashboard</Link>
               ) : (
                 <>
                   <Link to="/login" className="btn">Login</Link>
