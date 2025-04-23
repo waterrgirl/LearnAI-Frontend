@@ -2,35 +2,35 @@
 .notifications-page {
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 1.5rem; /* Reduced top padding */
 }
 
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem; /* Reduced margin */
   flex-wrap: wrap;
 }
 
 .page-header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.75rem; /* Smaller heading */
   color: #1f2937;
 }
 
 .notification-filters {
   display: flex;
   gap: 0.5rem;
-  margin: 1rem 0;
+  margin: 0.75rem 0; /* Reduced margin */
 }
 
 .filter-btn {
   background-color: white;
   border: 1px solid #e5e7eb;
   border-radius: 4px;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  padding: 0.4rem 0.75rem; /* Reduced padding */
+  font-size: 0.8rem; /* Smaller font */
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -50,12 +50,13 @@
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.75rem; /* Reduced padding */
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 0.85rem; /* Smaller font */
 }
 
 .refresh-button:hover {
@@ -71,7 +72,7 @@
 .error-message,
 .empty-state {
   text-align: center;
-  padding: 3rem;
+  padding: 2rem; /* Reduced padding */
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -93,8 +94,8 @@
 }
 
 .empty-state i {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem; /* Smaller icon */
+  margin-bottom: 0.75rem; /* Reduced margin */
   opacity: 0.5;
 }
 
@@ -102,28 +103,31 @@
 .notifications-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem; /* Reduced gap between cards */
+  max-height: calc(100vh - 180px); /* Limit height but allow scrolling */
+  overflow-y: auto;
 }
 
 .notification-card {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
+  padding: 0.75rem 1rem; /* Reduced padding */
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem; /* Reduced gap */
 }
 
 .notification-icon {
-  width: 40px;
-  height: 40px;
+  width: 32px; /* Smaller icon */
+  height: 32px; /* Smaller icon */
   border-radius: 50%;
   background-color: #f3f4f6;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #4b5563;
-  margin-right: 1rem;
+  margin-right: 0.5rem; /* Reduced margin */
+  flex-shrink: 0;
 }
 
 .notification-content {
@@ -131,35 +135,39 @@
 }
 
 .notification-title {
-  margin: 0 0 0.5rem;
-  font-size: 1.125rem;
+  margin: 0 0 0.25rem; /* Reduced margin */
+  font-size: 1rem; /* Smaller font */
   color: #1f2937;
 }
 
 .notification-meta {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
+  gap: 0.5rem; /* Reduced gap */
+  margin-bottom: 0.5rem; /* Reduced margin */
   flex-wrap: wrap;
 }
 
 .notification-description {
   color: #4b5563;
-  margin-bottom: 0.75rem;
-  font-size: 0.9rem;
+  margin-bottom: 0.5rem; /* Reduced margin */
+  font-size: 0.85rem; /* Smaller font */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .task-meta {
   display: flex;
-  gap: 1rem;
-  font-size: 0.85rem;
+  gap: 0.75rem; /* Reduced gap */
+  font-size: 0.75rem; /* Smaller font */
   color: #6b7280;
 }
 
 .status-badge {
-  padding: 0.25rem 0.5rem;
+  padding: 0.2rem 0.4rem; /* Smaller padding */
   border-radius: 4px;
-  font-size: 0.75rem;
+  font-size: 0.7rem; /* Smaller font */
   font-weight: 600;
 }
 
@@ -186,15 +194,15 @@
 .priority-badge {
   background-color: #f3f4f6;
   color: #4b5563;
-  padding: 0.25rem 0.5rem;
+  padding: 0.2rem 0.4rem; /* Smaller padding */
   border-radius: 4px;
-  font-size: 0.75rem;
+  font-size: 0.7rem; /* Smaller font */
   font-weight: 600;
 }
 
 .notification-actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.3rem; /* Reduced gap */
   margin-left: auto;
 }
 
@@ -202,12 +210,12 @@
   background: transparent;
   border: 1px solid #e5e7eb;
   border-radius: 4px;
-  padding: 0.5rem 0.75rem;
+  padding: 0.35rem 0.5rem; /* Reduced padding */
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  font-size: 0.825rem;
+  font-size: 0.75rem; /* Smaller font */
   transition: all 0.2s;
 }
 
@@ -233,13 +241,13 @@
   .page-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.75rem; /* Reduced gap */
   }
   
   .notification-filters {
     overflow-x: auto;
     padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem; /* Reduced margin */
   }
   
   .notification-card {
@@ -248,11 +256,11 @@
   
   .notification-icon {
     margin-right: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem; /* Reduced margin */
   }
   
   .task-meta {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.25rem; /* Reduced gap */
   }
 }

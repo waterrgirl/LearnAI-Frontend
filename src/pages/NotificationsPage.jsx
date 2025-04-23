@@ -208,17 +208,23 @@ function NotificationsPage() {
                   <span className={getNotificationStyle(notification.reminder_type)}>
                     {formatNotificationMessage(notification)}
                   </span>
-                  <span className="priority-badge">
-                    {notification.priority || 'Medium'}
-                  </span>
+                  {notification.priority && (
+                    <span className="priority-badge">
+                      {notification.priority}
+                    </span>
+                  )}
                 </div>
-                <p className="notification-description">
-                  {notification.description || 'No description provided'}
-                </p>
+                {notification.description && (
+                  <p className="notification-description">
+                    {notification.description}
+                  </p>
+                )}
                 <div className="task-meta">
-                  <span className="task-category">
-                    <i className="fas fa-tag"></i> {notification.category || 'General'}
-                  </span>
+                  {notification.category && (
+                    <span className="task-category">
+                      <i className="fas fa-tag"></i> {notification.category}
+                    </span>
+                  )}
                   <span className="task-date">
                     <i className="fas fa-calendar"></i> {notification.deadline}
                   </span>
@@ -228,14 +234,16 @@ function NotificationsPage() {
                 <button 
                   className="action-btn view-btn"
                   onClick={() => handleViewTask(notification.id)}
+                  title="View task details"
                 >
                   <i className="fas fa-eye"></i> View
                 </button>
                 <button 
                   className="action-btn complete-btn"
                   onClick={() => handleCompleteTask(notification.id)}
+                  title="Mark task as complete"
                 >
-                  <i className="fas fa-check"></i> Complete
+                  <i className="fas fa-check"></i> Done
                 </button>
               </div>
             </div>
