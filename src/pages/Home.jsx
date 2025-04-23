@@ -35,6 +35,7 @@ function HomePage() {
       </header>
 
       {/* Features Section */}
+          
       <section className="features">
         <div className="container">
           <h2>Smart Features for Academic Success</h2>
@@ -66,6 +67,20 @@ function HomePage() {
               </div>
               <h3>Smart Reminders</h3>
               <p>Receive timely notifications for upcoming deadlines and important tasks.</p>
+            </li>
+            <li className="feature-item">
+              <div className="feature-icon">
+                <i className="fas fa-lightbulb"></i>
+              </div>
+              <h3>Adaptive Suggestions</h3>
+              <p>Get personalized study tips and recommendations based on your unique learning patterns.</p>
+            </li>
+            <li className="feature-item">
+              <div className="feature-icon">
+                <i className="fas fa-user-friends"></i>
+              </div>
+              <h3>User Friendly Design</h3>
+              <p>Enjoy a clean, intuitive interface designed for smooth navigation and effortless task management.</p>
             </li>
           </ul>
         </div>

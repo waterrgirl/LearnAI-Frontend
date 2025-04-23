@@ -42,15 +42,15 @@ function Footer() {
           <div className="contact-info">
             <div className="contact-item">
               <i className="fas fa-envelope"></i>
-              <span>support@learnai.edu</span>
+              <span>hfyrk3@nottingham.edu.my</span>
             </div>
             <div className="contact-item">
               <i className="fas fa-phone"></i>
-              <span>+44 115 951 5151</span>
+              <span>+60 182 857 242</span>
             </div>
             <div className="contact-item">
               <i className="fas fa-map-marker-alt"></i>
-              <span>University of Nottingham<br />Nottingham, NG7 2RD, UK</span>
+              <span>University of Nottingham<br />Selangor, Malaysia</span>
             </div>
           </div>
         </div>
