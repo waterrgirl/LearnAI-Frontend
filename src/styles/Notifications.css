@@ -1,214 +1,281 @@
 /* Basic container positioning */
 .notifications-container {
   position: relative;
-  z-index: 1010; /* Ensure it's above other elements */
   display: inline-block;
 }
 
-/* Create a better click target */
-.notification-bell-wrapper {
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
+/* Bell styling */
+.notification-bell {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  transition: background-color 0.2s;
+  cursor: pointer;
+  color: var(--neutral-700);
+  transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
-.notification-bell-wrapper:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+.notification-bell:hover {
+  background-color: var(--neutral-100);
+  color: var(--primary-color);
+}
+
+.notification-bell i {
+  font-size: 1.25rem;
 }
 
 /* Badge for notification count */
 .notification-badge {
   position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 16px;
-  height: 16px;
-  background-color: #f56565;
+  top: 0px;
+  right: 0px;
+  min-width: 11px;
+  height: 11px;
+  background-color: #156ee2; /* Red color for better visibility */
   color: white;
   border-radius: 50%;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px solid white;
   padding: 2px;
+  box-sizing: content-box;
 }
 
-/* Dropdown container */
-.notifications-dropdown {
-  position: absolute;
-  top: 100%;
-  right: -10px;
+/* Notification drawer */
+.notifications-drawer {
+  position: fixed;
+  top: var(--navbar-height, 64px);
+  right: 0;
   width: 320px;
-  max-height: 400px;
+  max-width: 80%;
+  height: calc(100vh - var(--navbar-height, 64px));
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1010;
-  margin-top: 8px;
-  overflow: hidden;
-  border: 1px solid #eee;
-  animation: fadeIn 0.2s ease-out;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease, visibility 0s 0.3s;
+  visibility: hidden;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--neutral-100, #f3f4f6);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.notifications-drawer.open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.3s ease, visibility 0s 0s;
 }
 
-/* Header of the dropdown */
-.notifications-header {
-  padding: 12px 16px;
+/* Overlay for clicking outside */
+.notifications-overlay {
+  position: fixed;
+  top: var(--navbar-height, 64px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+/* Header section */
+.notifications-drawer-header {
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #eee;
-  background-color: #f9fafb;
+  border-bottom: 1px solid var(--neutral-100, #f3f4f6);
 }
 
-.notifications-header h3 {
+.notifications-drawer-header h2 {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--neutral-800, #1f2937);
 }
 
-.mark-read-btn {
+.close-drawer {
   background: transparent;
   border: none;
-  color: #3b82f6;
-  font-size: 0.8rem;
-  font-weight: 500;
+  padding: 0.5rem;
   cursor: pointer;
-  padding: 0;
+  color: var(--neutral-500, #6b7280);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.mark-read-btn:hover {
-  text-decoration: underline;
-  color: #2563eb;
+.close-drawer:hover {
+  color: var(--neutral-800, #1f2937);
 }
 
-/* Content area */
-.notifications-content {
+/* Content section */
+.notifications-drawer-content {
+  flex: 1;
   overflow-y: auto;
-  max-height: 320px;
+  padding: 1rem 0;
 }
 
-/* List of notifications */
-.notifications-list {
+/* Loading, error and empty states */
+.loading-state,
+.error-state,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--neutral-500, #6b7280);
+  height: 100%;
+}
+
+.loading-state i,
+.error-state i,
+.empty-state i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.error-state {
+  color: var(--error-color, #ef4444);
+}
+
+/* Notification categories */
+.notification-category {
+  margin-bottom: 1.5rem;
+}
+
+.category-title {
+  padding: 0 1rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.category-title.overdue {
+  color: var(--error-color, #ef4444);
+}
+
+.category-title.urgent {
+  color: var(--warning-color, #f59e0b);
+}
+
+.category-title.soon {
+  color: var(--info-color, #3b82f6);
+}
+
+.category-title.upcoming {
+  color: var(--success-color, #10b981);
+}
+
+/* Notification items */
+.notification-items {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .notification-item {
-  padding: 12px 16px;
-  border-bottom: 1px solid #eee;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--neutral-100, #f3f4f6);
+  cursor: pointer;
+  transition: background-color 0.2s;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
-  transition: background-color 0.2s;
+}
+
+.notification-item:hover {
+  background-color: var(--neutral-50, #f9fafb);
 }
 
 .notification-item:last-child {
   border-bottom: none;
 }
 
-.notification-item:hover {
-  background-color: #f9fafb;
-}
-
-/* Message in notification item */
-.notification-message {
-  font-size: 0.85rem;
-  color: #4b5563;
+.notification-content {
   flex: 1;
 }
 
-/* Priority badge */
-.notification-priority {
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 3px 6px;
-  border-radius: 4px;
-  background-color: #f3f4f6;
-  margin-left: 8px;
-  text-transform: uppercase;
+.task-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--neutral-800, #1f2937);
 }
 
-/* Notification types */
-.notification-overdue {
-  background-color: #fff1f0;
-  border-left: 3px solid #f5222d;
+.task-status {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--neutral-600, #4b5563);
+  font-weight: 500;
 }
 
-.notification-urgent {
-  background-color: #fff7e6;
-  border-left: 3px solid #fa8c16;
+.task-status.overdue {
+  color: var(--error-color, #ef4444);
 }
 
-.notification-soon {
-  background-color: #fffbe6;
-  border-left: 3px solid #faad14;
+.task-status.urgent {
+  color: var(--warning-color, #f59e0b);
 }
 
-.notification-upcoming {
-  background-color: #f6ffed;
-  border-left: 3px solid #52c41a;
+.task-status.soon {
+  color: var(--info-color, #3b82f6);
 }
 
-/* Info messages */
-.loading-text,
-.error-text,
-.no-notifications {
-  padding: 24px 16px;
-  text-align: center;
-  color: #6b7280;
-  font-size: 0.9rem;
+.task-status.upcoming {
+  color: var(--success-color, #10b981);
 }
 
-.error-text {
-  color: #ef4444;
+.notification-item i {
+  color: var(--neutral-400, #9ca3af);
+  font-size: 0.75rem;
 }
 
-/* Footer section with "See all" link */
-.notifications-footer {
-  padding: 12px 16px;
+/* Footer section */
+.notifications-drawer-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--neutral-100, #f3f4f6);
   display: flex;
   justify-content: center;
-  border-top: 1px solid #eee;
-  background-color: #f9fafb;
 }
 
-.see-all-link {
-  color: #3b82f6;
-  font-size: 0.85rem;
-  font-weight: 500;
+.view-all-link {
+  color: var(--primary-color, #3b82f6);
   text-decoration: none;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
   transition: all 0.2s;
 }
 
-.see-all-link:hover {
-  color: #2563eb;
-  text-decoration: underline;
+.view-all-link:hover {
+  background-color: var(--primary-50, #eff6ff);
+  color: var(--primary-600, #2563eb);
 }
 
-.see-all-link i {
-  font-size: 0.7rem;
+.view-all-link i {
+  font-size: 0.75rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .notifications-drawer {
+    width: 280px;
+  }
 }

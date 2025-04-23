@@ -12,10 +12,10 @@ function Notifications() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDrawer, setShowDrawer] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const navigate = useNavigate();
-  const dropdownRef = useRef(null);
+  const drawerRef = useRef(null);
   const buttonRef = useRef(null);
   console.log("Rendering notifications component");
 
@@ -25,17 +25,17 @@ function Notifications() {
       e.preventDefault();
       e.stopPropagation();
     }
-    setShowDropdown(prev => !prev);
+    setShowDrawer(prev => !prev);
   };
   
-  // Handle clicks outside of the dropdown
+  // Handle clicks outside of the drawer
   useEffect(() => {
     function handleClickOutside(event) {
-      if (dropdownRef.current && 
-          !dropdownRef.current.contains(event.target) && 
+      if (drawerRef.current && 
+          !drawerRef.current.contains(event.target) && 
           buttonRef.current && 
           !buttonRef.current.contains(event.target)) {
-        setShowDropdown(false);
+        setShowDrawer(false);
       }
     }
     
@@ -56,9 +56,6 @@ function Notifications() {
     // Add event listener for task updates
     window.addEventListener('tasksUpdated', fetchNotifications);
     
-    // For debugging
-    console.log("Today's date in Notifications component:", new Date().toISOString().split('T')[0]);
-    
     return () => {
       clearInterval(intervalId);
       window.removeEventListener('tasksUpdated', fetchNotifications);
@@ -72,7 +69,7 @@ function Notifications() {
     setUnreadCount(totalCount);
   }, [notifications]);
 
-  // Add the missing function to calculate total notifications
+  // Calculate total notifications
   const getTotalNotifications = () => {
     return notifications.overdue.length + 
            notifications.urgent.length + 
@@ -93,7 +90,7 @@ function Notifications() {
       
       setLoading(true);
       
-      // Use direct API endpoint without environment variables
+      // Use direct API endpoint
       const response = await axios.get("/api/reminders", {
         headers: {
           'X-User-ID': userId
@@ -126,7 +123,7 @@ function Notifications() {
   const handleTaskClick = (taskId) => {
     // Navigate to tasks page
     navigate('/tasks');
-    setShowDropdown(false);
+    setShowDrawer(false);
   };
 
   const getNotificationStyle = (type) => {
@@ -139,18 +136,15 @@ function Notifications() {
     }
   };
 
-  const formatMessage = (task) => {
+  const formatStatus = (task) => {
     switch (task.reminder_type) {
-      case 'overdue': return `OVERDUE: ${task.title} (${task.deadline})`;
-      case 'urgent': return `Due today: ${task.title}`;
-      case 'soon': return `Due tomorrow: ${task.title}`;
-      case 'upcoming': return `Due soon: ${task.title} (${task.deadline})`;
-      default: return task.title;
+      case 'overdue': return 'OVERDUE';
+      case 'urgent': return 'Due Today';
+      case 'soon': return 'Due Tomorrow';
+      case 'upcoming': return `Due ${task.deadline}`;
+      default: return '';
     }
   };
-
-  // For debugging only
-  console.log("Rendering Notifications component", { showDropdown, unreadCount });
 
   return (
     <div className="notifications-container">
@@ -164,82 +158,144 @@ function Notifications() {
         <i className="fas fa-bell"></i>
         {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
       </button>
-
-      {showDropdown && (
-        <div className="notifications-dropdown" ref={dropdownRef}>
-          <div className="notifications-header">
-            <h3>Notifications</h3>
-            <button className="mark-read-btn" onClick={fetchNotifications}>
-              Refresh
-            </button>
-          </div>
-          
-          {loading ? (
-            <p className="loading-text">Loading notifications...</p>
-          ) : error ? (
-            <p className="error-text">{error}</p>
-          ) : (
-            <div className="notifications-content">
-              {notifications.overdue.length === 0 &&
-               notifications.urgent.length === 0 &&
-               notifications.soon.length === 0 &&
-               notifications.upcoming.length === 0 ? (
-                <p className="no-notifications">No pending notifications</p>
-              ) : (
-                <ul className="notifications-list">
-                  {notifications.overdue.map(task => (
-                    <li 
-                      key={task.id} 
-                      className={`notification-item ${getNotificationStyle(task.reminder_type)}`}
-                      onClick={() => handleTaskClick(task.id)}
-                    >
-                      <span className="notification-message">{formatMessage(task)}</span>
-                      <span className="notification-priority">{task.priority}</span>
-                    </li>
-                  ))}
-                  
-                  {notifications.urgent.map(task => (
-                    <li 
-                      key={task.id} 
-                      className={`notification-item ${getNotificationStyle(task.reminder_type)}`}
-                      onClick={() => handleTaskClick(task.id)}
-                    >
-                      <span className="notification-message">{formatMessage(task)}</span>
-                      <span className="notification-priority">{task.priority}</span>
-                    </li>
-                  ))}
-                  
-                  {notifications.soon.map(task => (
-                    <li 
-                      key={task.id} 
-                      className={`notification-item ${getNotificationStyle(task.reminder_type)}`}
-                      onClick={() => handleTaskClick(task.id)}
-                    >
-                      <span className="notification-message">{formatMessage(task)}</span>
-                      <span className="notification-priority">{task.priority}</span>
-                    </li>
-                  ))}
-                  
-                  {notifications.upcoming.map(task => (
-                    <li 
-                      key={task.id} 
-                      className={`notification-item ${getNotificationStyle(task.reminder_type)}`}
-                      onClick={() => handleTaskClick(task.id)}
-                    >
-                      <span className="notification-message">{formatMessage(task)}</span>
-                      <span className="notification-priority">{task.priority}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          )}
-          <div className="notifications-footer">
-            <Link to="/notifications" className="see-all-link" onClick={() => setShowDropdown(false)}>
-              See all notifications <i className="fas fa-chevron-right"></i>
-            </Link>
-          </div>
+  
+      <div 
+        className={`notifications-drawer ${showDrawer ? 'open' : ''}`}
+        ref={drawerRef}
+      >
+        <div className="notifications-drawer-header">
+          <h2>Notifications</h2>
+          <button 
+            className="close-drawer"
+            onClick={() => setShowDrawer(false)}
+          >
+            <i className="fas fa-times"></i>
+          </button>
         </div>
+        
+        <div className="notifications-drawer-content">
+          {loading ? (
+            <div className="loading-state">
+              <i className="fas fa-spinner fa-spin"></i>
+              <p>Loading notifications...</p>
+            </div>
+          ) : error ? (
+            <div className="error-state">
+              <i className="fas fa-exclamation-circle"></i>
+              <p>{error}</p>
+            </div>
+          ) : getTotalNotifications() === 0 ? (
+            <div className="empty-state">
+              <i className="fas fa-bell-slash"></i>
+              <p>No notifications</p>
+            </div>
+          ) : (
+            <>
+              {notifications.overdue.length > 0 && (
+                <div className="notification-category">
+                  <h3 className="category-title overdue">Overdue</h3>
+                  <ul className="notification-items">
+                    {notifications.overdue.map(task => (
+                      <li 
+                        key={task.id} 
+                        className="notification-item"
+                        onClick={() => handleTaskClick(task.id)}
+                      >
+                        <div className="notification-content">
+                          <h4 className="task-title">{task.title}</h4>
+                          <p className="task-status overdue">{formatStatus(task)}</p>
+                        </div>
+                        <i className="fas fa-chevron-right"></i>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {notifications.urgent.length > 0 && (
+                <div className="notification-category">
+                  <h3 className="category-title urgent">Due Today</h3>
+                  <ul className="notification-items">
+                    {notifications.urgent.map(task => (
+                      <li 
+                        key={task.id} 
+                        className="notification-item"
+                        onClick={() => handleTaskClick(task.id)}
+                      >
+                        <div className="notification-content">
+                          <h4 className="task-title">{task.title}</h4>
+                          <p className="task-status urgent">{formatStatus(task)}</p>
+                        </div>
+                        <i className="fas fa-chevron-right"></i>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {notifications.soon.length > 0 && (
+                <div className="notification-category">
+                  <h3 className="category-title soon">Due Tomorrow</h3>
+                  <ul className="notification-items">
+                    {notifications.soon.map(task => (
+                      <li 
+                        key={task.id} 
+                        className="notification-item"
+                        onClick={() => handleTaskClick(task.id)}
+                      >
+                        <div className="notification-content">
+                          <h4 className="task-title">{task.title}</h4>
+                          <p className="task-status soon">{formatStatus(task)}</p>
+                        </div>
+                        <i className="fas fa-chevron-right"></i>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {notifications.upcoming.length > 0 && (
+                <div className="notification-category">
+                  <h3 className="category-title upcoming">Coming Up</h3>
+                  <ul className="notification-items">
+                    {notifications.upcoming.map(task => (
+                      <li 
+                        key={task.id} 
+                        className="notification-item"
+                        onClick={() => handleTaskClick(task.id)}
+                      >
+                        <div className="notification-content">
+                          <h4 className="task-title">{task.title}</h4>
+                          <p className="task-status upcoming">{formatStatus(task)}</p>
+                        </div>
+                        <i className="fas fa-chevron-right"></i>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        
+        <div className="notifications-drawer-footer">
+          <Link 
+            to="/notifications" 
+            className="view-all-link"
+            onClick={() => setShowDrawer(false)}
+          >
+            View All Notifications
+            <i className="fas fa-arrow-right"></i>
+          </Link>
+        </div>
+      </div>
+      
+      {/* Add an overlay when drawer is open */}
+      {showDrawer && (
+        <div 
+          className="notifications-overlay"
+          onClick={() => setShowDrawer(false)}
+        ></div>
       )}
     </div>
   );
