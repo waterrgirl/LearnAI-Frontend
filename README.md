@@ -37,9 +37,9 @@ The LearnAI Frontend provides a responsive, intuitive user interface for student
 
 ### Installation
 
-1. Clone the repository:
+1. Download sourcecode:
    ```bash
-   git clone https://github.com/yourusername/LearnAI-Project.git
+   git clone https://github.com/waterrgirl/LearnAI-Frontend.git
    cd LearnAI-Project/LearnAI-Frontend
    ```
 
