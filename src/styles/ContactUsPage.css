@@ -219,7 +219,7 @@ imp.contact-page {
   transform: none;
 }
 
-/* Success message */
+
 .form-success {
   text-align: center;
   padding: 2rem;
@@ -244,7 +244,7 @@ imp.contact-page {
   line-height: 1.6;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 992px) {
   .contact-content {
     grid-template-columns: 1fr;

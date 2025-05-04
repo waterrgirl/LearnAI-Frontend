@@ -7,7 +7,7 @@ const API = axios.create({
   }
 });
 
-// Add interceptor to include the user ID in requests
+// Interceptor to include the user ID in requests
 API.interceptors.request.use(
   (config) => {
     const userStr = localStorage.getItem('user');
@@ -26,7 +26,7 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Add authentication utility functions
+// Authentication utility functions
 export const logout = () => {
   localStorage.removeItem('user');
   window.location.href = '/login';

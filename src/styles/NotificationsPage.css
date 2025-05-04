@@ -1,36 +1,35 @@
-/* Notifications Page Styles */
 .notifications-page {
   max-width: 800px;
   margin: 0 auto;
-  padding: 1.5rem 1.5rem; /* Reduced top padding */
+  padding: 1.5rem 1.5rem; 
 }
 
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem; /* Reduced margin */
+  margin-bottom: 1rem; 
   flex-wrap: wrap;
 }
 
 .page-header h1 {
   margin: 0;
-  font-size: 1.75rem; /* Smaller heading */
+  font-size: 1.75rem; 
   color: #1f2937;
 }
 
 .notification-filters {
   display: flex;
   gap: 0.5rem;
-  margin: 0.75rem 0; /* Reduced margin */
+  margin: 0.75rem 0; 
 }
 
 .filter-btn {
   background-color: white;
   border: 1px solid #e5e7eb;
   border-radius: 4px;
-  padding: 0.4rem 0.75rem; /* Reduced padding */
-  font-size: 0.8rem; /* Smaller font */
+  padding: 0.4rem 0.75rem; 
+  font-size: 0.8rem; 
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -50,13 +49,13 @@
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 0.4rem 0.75rem; /* Reduced padding */
+  padding: 0.4rem 0.75rem; 
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.85rem; /* Smaller font */
+  font-size: 0.85rem; 
 }
 
 .refresh-button:hover {
@@ -72,7 +71,7 @@
 .error-message,
 .empty-state {
   text-align: center;
-  padding: 2rem; /* Reduced padding */
+  padding: 2rem; 
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -94,17 +93,17 @@
 }
 
 .empty-state i {
-  font-size: 2.5rem; /* Smaller icon */
-  margin-bottom: 0.75rem; /* Reduced margin */
+  font-size: 2.5rem; 
+  margin-bottom: 0.75rem; 
   opacity: 0.5;
 }
 
-/* Notification cards */
+
 .notifications-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem; /* Reduced gap between cards */
-  max-height: calc(100vh - 180px); /* Limit height but allow scrolling */
+  gap: 0.75rem; 
+  max-height: calc(100vh - 180px); 
   overflow-y: auto;
 }
 
@@ -112,21 +111,21 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 0.75rem 1rem; /* Reduced padding */
+  padding: 0.75rem 1rem; 
   display: flex;
-  gap: 0.75rem; /* Reduced gap */
+  gap: 0.75rem; 
 }
 
 .notification-icon {
-  width: 32px; /* Smaller icon */
-  height: 32px; /* Smaller icon */
+  width: 32px; 
+  height: 32px; 
   border-radius: 50%;
   background-color: #f3f4f6;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #4b5563;
-  margin-right: 0.5rem; /* Reduced margin */
+  margin-right: 0.5rem; 
   flex-shrink: 0;
 }
 
@@ -135,39 +134,39 @@
 }
 
 .notification-title {
-  margin: 0 0 0.25rem; /* Reduced margin */
-  font-size: 1rem; /* Smaller font */
+  margin: 0 0 0.25rem; 
+  font-size: 1rem; 
   color: #1f2937;
 }
 
 .notification-meta {
   display: flex;
-  gap: 0.5rem; /* Reduced gap */
-  margin-bottom: 0.5rem; /* Reduced margin */
+  gap: 0.5rem; 
+  margin-bottom: 0.5rem; 
   flex-wrap: wrap;
 }
 
 .notification-description {
   color: #4b5563;
-  margin-bottom: 0.5rem; /* Reduced margin */
-  font-size: 0.85rem; /* Smaller font */
+  margin-bottom: 0.5rem; 
+  font-size: 0.85rem; 
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .task-meta {
   display: flex;
-  gap: 0.75rem; /* Reduced gap */
-  font-size: 0.75rem; /* Smaller font */
+  gap: 0.75rem; 
+  font-size: 0.75rem; 
   color: #6b7280;
 }
 
 .status-badge {
-  padding: 0.2rem 0.4rem; /* Smaller padding */
+  padding: 0.2rem 0.4rem; 
   border-radius: 4px;
-  font-size: 0.7rem; /* Smaller font */
+  font-size: 0.7rem; 
   font-weight: 600;
 }
 
@@ -194,15 +193,15 @@
 .priority-badge {
   background-color: #f3f4f6;
   color: #4b5563;
-  padding: 0.2rem 0.4rem; /* Smaller padding */
+  padding: 0.2rem 0.4rem; 
   border-radius: 4px;
-  font-size: 0.7rem; /* Smaller font */
+  font-size: 0.7rem; 
   font-weight: 600;
 }
 
 .notification-actions {
   display: flex;
-  gap: 0.3rem; /* Reduced gap */
+  gap: 0.3rem; 
   margin-left: auto;
 }
 
@@ -210,12 +209,12 @@
   background: transparent;
   border: 1px solid #e5e7eb;
   border-radius: 4px;
-  padding: 0.35rem 0.5rem; /* Reduced padding */
+  padding: 0.35rem 0.5rem; 
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  font-size: 0.75rem; /* Smaller font */
+  font-size: 0.75rem; 
   transition: all 0.2s;
 }
 
@@ -236,18 +235,18 @@
   opacity: 1;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .page-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem; /* Reduced gap */
+    gap: 0.75rem; 
   }
   
   .notification-filters {
     overflow-x: auto;
     padding-bottom: 0.5rem;
-    margin-bottom: 0.75rem; /* Reduced margin */
+    margin-bottom: 0.75rem; 
   }
   
   .notification-card {
@@ -256,11 +255,11 @@
   
   .notification-icon {
     margin-right: 0;
-    margin-bottom: 0.5rem; /* Reduced margin */
+    margin-bottom: 0.5rem; 
   }
   
   .task-meta {
     flex-direction: column;
-    gap: 0.25rem; /* Reduced gap */
+    gap: 0.25rem; 
   }
 }

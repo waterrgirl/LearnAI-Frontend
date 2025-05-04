@@ -4,7 +4,7 @@
   padding: 2rem 1.5rem;
 }
 
-/* Header styles */
+
 .settings-header {
   margin-bottom: 2rem;
 }
@@ -38,7 +38,7 @@
   font-size: 1.05rem;
 }
 
-/* Tabs navigation */
+
 .settings-tabs {
   display: flex;
   gap: 0.5rem;
@@ -46,11 +46,11 @@
   border-bottom: 1px solid var(--neutral-200, #e5e7eb);
   padding-bottom: 0.25rem;
   overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; 
 }
 
 .settings-tabs::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none; 
 }
 
 .settings-tab {
@@ -95,7 +95,7 @@
   border-radius: 3px;
 }
 
-/* Alert messages */
+
 .settings-alert {
   padding: 1rem;
   border-radius: 8px;
@@ -127,7 +127,7 @@
   color: var(--error-700, #b91c1c);
 }
 
-/* Section styles */
+
 .settings-section {
   background-color: white;
   border-radius: 12px;
@@ -166,7 +166,7 @@
   font-size: 0.95rem;
 }
 
-/* Setting Options */
+
 .setting-options {
   display: flex;
   flex-direction: column;
@@ -201,7 +201,7 @@
   color: var(--neutral-500, #6b7280);
 }
 
-/* Toggle Switch */
+
 .toggle-switch {
   position: relative;
   display: inline-block;
@@ -251,7 +251,7 @@ input:checked + .toggle-slider:before {
   transform: translateX(26px);
 }
 
-/* Form styles */
+
 .form-group {
   margin-bottom: 1.25rem;
 }
@@ -305,7 +305,7 @@ input:checked + .toggle-slider:before {
   color: var(--neutral-500, #6b7280);
 }
 
-/* Password requirements */
+
 .password-requirements {
   background-color: var(--neutral-50, #f9fafb);
   padding: 1rem;
@@ -351,7 +351,7 @@ input:checked + .toggle-slider:before {
   color: var(--neutral-400, #9ca3af);
 }
 
-/* Button styles */
+
 .settings-action {
   display: flex;
   justify-content: flex-start;
@@ -418,7 +418,7 @@ input:checked + .toggle-slider:before {
   box-shadow: none !important;
 }
 
-/* Account info card */
+
 .account-info-card {
   display: flex;
   flex-direction: column;
@@ -466,7 +466,7 @@ input:checked + .toggle-slider:before {
   transform: scale(1.1);
 }
 
-/* Two-factor authentication */
+
 .two-factor-status {
   display: flex;
   align-items: center;
@@ -501,7 +501,7 @@ input:checked + .toggle-slider:before {
   font-size: 0.95rem;
 }
 
-/* Danger zone */
+
 .danger-zone {
   border: 1px solid var(--error-200, #fecaca);
   background-color: white;
@@ -542,7 +542,7 @@ input:checked + .toggle-slider:before {
   color: var(--neutral-500, #6b7280);
 }
 
-/* Theme selector */
+
 .theme-options {
   margin-bottom: 1.5rem;
 }
@@ -646,7 +646,7 @@ input:checked + .toggle-slider:before {
   color: var(--primary-color, #3b82f6);
 }
 
-/* Responsive styles */
+
 @media (min-width: 768px) {
   .account-info-card {
     flex-direction: row;

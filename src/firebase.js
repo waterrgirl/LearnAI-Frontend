@@ -7,7 +7,7 @@ const firebaseConfig = {
     projectId: "learnai-181bb",
     storageBucket: "learnai-181bb.appspot.com",
     messagingSenderId: "102371001093694315634",
-    appId: "1:102371001093694315634:web:a1b2c3d4e5f6g7h8i9j0" // Replace with your actual app ID
+    appId: "1:102371001093694315634:web:a1b2c3d4e5f6g7h8i9j0" 
 };
 
 // Initialize Firebase

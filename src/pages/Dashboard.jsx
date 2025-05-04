@@ -22,7 +22,7 @@ function Dashboard() {
   const [editMode, setEditMode] = useState(false);
   const [updatedName, setUpdatedName] = useState("");
   const [updateMessage, setUpdateMessage] = useState("");
-  const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' or 'profile'
+  const [activeTab, setActiveTab] = useState('dashboard'); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function Dashboard() {
           setUserData(prev => ({...prev, ...response.data}));
         } catch (profileError) {
           console.log('Profile data fetch failed, using local data:', profileError);
-          // Continue with locally stored user data
+
         }
         
         // Fetch tasks for stats
@@ -482,7 +482,6 @@ function Dashboard() {
   );
 }
 
-// Helper function to determine icon based on suggestion type
 function getSuggestionIcon(type) {
   switch (type) {
     case 'productivity': return 'fa-chart-line';

@@ -1,4 +1,3 @@
-/* Calendar Page Styles */
 .calendar-page-container {
   max-width: 1000px;
   margin: 2rem auto;
@@ -12,7 +11,7 @@
   font-weight: 700;
 }
 
-/* Main Calendar Styling */
+
 .react-calendar {
   width: 100%;
   border: 1px solid var(--neutral-200);
@@ -24,7 +23,7 @@
   font-family: var(--font-primary);
 }
 
-/* Navigation buttons */
+
 .react-calendar__navigation {
   display: flex;
   margin-bottom: 1rem;
@@ -53,7 +52,7 @@
   cursor: not-allowed;
 }
 
-/* Weekday headers */
+
 .react-calendar__month-view__weekdays {
   text-align: center;
   text-transform: uppercase;
@@ -70,7 +69,7 @@
   }
 }
 
-/* Day cells */
+
 .react-calendar__tile {
   height: 120px;
   max-width: 100%;
@@ -102,7 +101,7 @@
   color: var(--primary-dark);
 }
 
-/* Tiles with tasks */
+
 .react-calendar__tile--hasTask {
   background-color: rgba(74, 222, 128, 0.1);
   border: 1px solid rgba(74, 222, 128, 0.3);
@@ -112,7 +111,7 @@
   background-color: rgba(74, 222, 128, 0.15);
 }
 
-/* Task styles inside calendar cells */
+
 .task-tile-content {
   width: 100%;
   margin-top: 0.5rem;
@@ -142,7 +141,7 @@
   padding: 0 0.5rem;
 }
 
-/* Fix for month and year view */
+
 .react-calendar__year-view .react-calendar__tile,
 .react-calendar__decade-view .react-calendar__tile,
 .react-calendar__century-view .react-calendar__tile {
@@ -150,7 +149,7 @@
   padding: 0.75rem;
 }
 
-/* Modal styling */
+
 .task-modal-overlay {
   position: fixed;
   top: 0;

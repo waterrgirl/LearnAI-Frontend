@@ -23,7 +23,7 @@
   font-size: 0.95rem;
 }
 
-/* Tab switcher */
+
 .dashboard-tabs {
   display: flex;
   gap: 0.5rem;
@@ -52,14 +52,13 @@
   color: white;
 }
 
-/* Grid layout for dashboard */
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 320px;
   gap: 1.5rem;
 }
 
-/* Cards styling */
+
 .dashboard-card {
   background-color: white;
   border-radius: 8px;
@@ -97,7 +96,7 @@
   font-size: 0.75rem;
 }
 
-/* Suggestions widget */
+
 .suggestions-widget {
   border-left: 3px solid var(--primary-color, #3b82f6);
 }
@@ -183,7 +182,7 @@
   line-height: 1.4;
 }
 
-/* Suggestion types */
+
 .suggestion-productivity {
   background-color: #fff7ed;
 }
@@ -244,7 +243,7 @@
   background-color: rgba(59, 130, 246, 0.2);
 }
 
-/* Quick actions */
+
 .quick-actions {
   border-left: 3px solid var(--neutral-300, #d1d5db);
 }
@@ -285,7 +284,7 @@
   color: var(--primary-color, #3b82f6);
 }
 
-/* Profile styles */
+
 .profile-container {
   max-width: 800px;
   margin: 0 auto;
@@ -429,7 +428,7 @@
   text-align: center;
 }
 
-/* Stats styling */
+
 .stats-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -473,7 +472,7 @@
   color: #e53e3e;
 }
 
-/* Account actions */
+
 .account-actions {
   display: flex;
   flex-wrap: wrap;
@@ -533,7 +532,7 @@
   color: var(--primary-color, #3b82f6);
 }
 
-/* Calendar Preview Styles */
+
 .calendar-preview-content {
   padding: 0.5rem;
 }
@@ -587,7 +586,7 @@
 
 .event-details {
   flex: 1;
-  min-width: 0; /* Ensures proper text truncation */
+  min-width: 0; 
 }
 
 .event-title {
@@ -689,7 +688,7 @@
 }
 
 
-/* Progress Preview */
+
 .progress-preview {
   padding: 1rem;
   display: flex;
@@ -746,7 +745,7 @@
   color: #718096;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 1024px) {
   .dashboard-header {
     flex-direction: column;
@@ -794,7 +793,7 @@
   }
 }
 
-/* Fix for empty progress chart */
+
 .completion-circle {
   background: conic-gradient(
     #48bb78 0% 0%,
@@ -809,7 +808,7 @@
   );
 }
 
-/* Animation for loading spinner */
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

@@ -161,7 +161,7 @@
   color: var(--neutral-500, #6b7280);
 }
 
-/* Features grid */
+
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -211,7 +211,6 @@
   line-height: 1.5;
 }
 
-/* Tech stack */
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
@@ -249,7 +248,7 @@
   color: var(--neutral-700, #4b5563);
 }
 
-/* CTA section */
+
 .about-action {
   text-align: center;
   margin: 4rem 0 2rem;
@@ -304,7 +303,6 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .about-page {
     padding: 2rem 1rem;

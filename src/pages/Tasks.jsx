@@ -48,7 +48,7 @@ function TasksPage() {
     try {
       await API.post("/api/add-task", newTask);
       setNewTask({ title: "", deadline: "", priority: "Low", description: "" });
-      fetchTasks(); // Will dispatch the tasksUpdated event
+      fetchTasks(); 
     } catch (err) {
       console.error("Error adding task:", err);
       alert("Failed to add task.");
@@ -103,7 +103,7 @@ function TasksPage() {
     try {
       await API.patch(`/api/tasks/${id}`, { 
         completed: !current,
-        // If we're completing a task, set status to completed. If undoing, set to pending
+        // If completing a task, set status to completed. If undoing, set to pending
         status: !current ? 'completed' : 'pending'
       });
       fetchTasks(); // Will dispatch the tasksUpdated event
@@ -235,7 +235,7 @@ function TasksPage() {
                       </button>
                       
                       <div className="status-buttons">
-                        {/* Removed the In Progress button */}
+                        
                         
                         <button 
                           onClick={() => toggleCompletion(task.id, task.completed)}

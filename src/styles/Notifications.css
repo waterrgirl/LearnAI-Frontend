@@ -150,7 +150,7 @@
   color: var(--error-color, #ef4444);
 }
 
-/* Notification categories */
+
 .notification-category {
   margin-bottom: 1.5rem;
 }
@@ -180,7 +180,7 @@
   color: var(--success-color, #10b981);
 }
 
-/* Notification items */
+
 .notification-items {
   list-style: none;
   padding: 0;
@@ -244,7 +244,7 @@
   font-size: 0.75rem;
 }
 
-/* Footer section */
+
 .notifications-drawer-footer {
   padding: 1rem;
   border-top: 1px solid var(--neutral-100, #f3f4f6);
@@ -273,7 +273,7 @@
   font-size: 0.75rem;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 640px) {
   .notifications-drawer {
     width: 280px;

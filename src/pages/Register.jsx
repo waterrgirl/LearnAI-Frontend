@@ -56,10 +56,10 @@ function RegisterPage() {
       // Get ID token for authentication
       const idToken = await user.getIdToken();
       
-      // Register with backend - only save user data in Firestore, not creating Auth user again
+      // Register with backend
       await API.post("/api/register", {
-        idToken: idToken,  // Send the ID token instead of credentials
-        name: name,        // Still send the name for profile info
+        idToken: idToken,  
+        name: name,       
       });
 
       setSuccessMessage("Account created successfully! You can now log in.");
